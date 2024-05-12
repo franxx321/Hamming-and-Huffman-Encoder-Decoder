@@ -58,7 +58,6 @@ public class HammingProcessor {
         return bin;
     }
 
-
     private void inWrite(byte[] bout, String pathName) throws IOException, FileNotFoundException {
         FileOutputStream fos = new FileOutputStream(new File(pathName));
         fos.write(bout);

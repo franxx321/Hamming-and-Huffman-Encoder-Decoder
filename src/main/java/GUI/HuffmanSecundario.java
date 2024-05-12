@@ -66,15 +66,15 @@ public class HuffmanSecundario extends Panel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addGap(63, 63, 63)
                 .addComponent(CompactarButton)
-                .addGap(101, 101, 101)
-                .addComponent(DescompactarButton)
-                .addGap(111, 111, 111)
-                .addComponent(CompararButton)
                 .addGap(107, 107, 107)
+                .addComponent(DescompactarButton)
+                .addGap(97, 97, 97)
+                .addComponent(CompararButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addComponent(EstadisticasButton)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +85,7 @@ public class HuffmanSecundario extends Panel {
                     .addComponent(DescompactarButton)
                     .addComponent(CompararButton)
                     .addComponent(EstadisticasButton))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

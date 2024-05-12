@@ -13,7 +13,7 @@ import javax.swing.filechooser.FileSystemView;
  */
 public class CompactarPanel extends Panel {
 
-    public String path;
+    private String path;
 
     /**
      * Creates new form CompactarPanel
@@ -54,6 +54,11 @@ public class CompactarPanel extends Panel {
         });
 
         jButton1.setText("Compactar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         TextoArchivoTextArea.setColumns(20);
         TextoArchivoTextArea.setRows(5);
@@ -76,7 +81,7 @@ public class CompactarPanel extends Panel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jButton1)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +97,7 @@ public class CompactarPanel extends Panel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addComponent(jButton1)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -111,6 +116,10 @@ public class CompactarPanel extends Panel {
 
     }//GEN-LAST:event_AbrirAButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     @Override
     public void init() {
@@ -125,7 +134,5 @@ public class CompactarPanel extends Panel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-
-
     // End of variables declaration//GEN-END:variables
 }
