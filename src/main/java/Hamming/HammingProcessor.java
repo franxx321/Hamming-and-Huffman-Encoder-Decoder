@@ -41,17 +41,16 @@ public class HammingProcessor {
         String fileExtension = pathName.substring(pathName.lastIndexOf('.')+1);
         int extensionSize= fileExtension.length();
         byte[] bin = new byte[(int)f1.length()+sbytes+1+extensionSize];
-        int inSize = ((int)f1.length())+extensionSize+sbytes;
+        int inSize = ((int)f1.length())+extensionSize+1+sbytes;
         int i;
         for (i=0;i<sbytes;i++){
             byte auxByte = (byte)(inSize>>>((sbytes-i-1)*8));
             bin[i]=auxByte;
         }
-        i++;
         bin[i]=(byte)extensionSize;
         i++;
         int j=i;
-        while (i<(j+inSize)){
+        while (i<(j+extensionSize)){
             bin[i]=(byte)fileExtension.charAt(i-j);
             i++;
         }
@@ -68,7 +67,8 @@ public class HammingProcessor {
 
     private void outWrite(byte [] bout,String pathName) throws IOException, FileNotFoundException{
         FileOutputStream fos = new FileOutputStream(new File(pathName));
-        fos.write(bout,4,bout.length-4);
+        String extension=pathName.substring(pathName.lastIndexOf('.')+1);
+        fos.write(bout,sbytes+1+extension.length(),bout.length-sbytes-1-extension.length());
         fos.close();
     }
 
@@ -110,7 +110,8 @@ public class HammingProcessor {
         }
         return binter;
     }
-    private byte[] deHumminize(byte[] bin,String originalExtension){
+    private byte[] deHumminize(byte[] bin, StringBuilder extensionBuilder){
+        extensionBuilder.delete(0,extensionBuilder.length());
         nHB = bin.length/nBytes;
         byte[] auxArr = new byte[sbytes+1];
         int counter= sbits+8;
@@ -119,7 +120,7 @@ public class HammingProcessor {
                 for(int i=1;i<cBits;i++){
                     int aux= (int)Math.pow(2,i);
                     for (int j = aux;j<=(aux*2)-2;j++){
-                        int aux2= sbits-counter;
+                        int aux2= (sbits+8)-counter;
                         auxArr[aux2/8] = (byte)(auxArr[aux2/8] | ((bin[(k* nBytes)+(j/8)]>>>j%8)&0x1)<<aux2%8);
                         counter--;
                     }
@@ -163,13 +164,12 @@ public class HammingProcessor {
         int aux4= sbits+8;
         for (int i=0;i<extensionSize*8;i++){
             int aux2=aux4+i;
-            auxChar[i/8] = (char)(auxChar[i/8] & (((auxArr[aux2/8]>>>(aux2%8))&0x1)<<aux2%8));
+            auxChar[i/8] = (char)(auxChar[i/8] | (((auxArr[aux2/8]>>>(aux2%8))&0x1)<<(aux2%8)));
         }
 
-        String extension ="";
 
         for (char a :auxChar){
-            extension= extension+a;
+            extensionBuilder.append(a);
         }
 
 
@@ -191,7 +191,6 @@ public class HammingProcessor {
                 }
             }
         }
-     originalExtension=extension;
      return bout;
     }
 
@@ -242,24 +241,36 @@ public class HammingProcessor {
 
     public void RHIEaS(String pathname,int probability) throws IOException, FileNotFoundException {
 
+        String fileType="";
+        if(nBits == 8){
+            fileType=".he1";
+        } else if (nBits==4096) {
+            fileType=".he2";
+        } else if (nBits==65536) {
+            fileType=".he3";
+        }
+        else {
+            fileType =(".he"+Integer.toString(nBits));
+        }
+
         byte[] bin = this.inRead(pathname);
         byte[] bout = this.humminize(bin);
         bout =this.introduceErrors( bout,probability);
-        this.inWrite(bout, pathname.substring(0,pathname.indexOf('.'))+".hax");
+        this.inWrite(bout, pathname.substring(0,pathname.indexOf('.'))+fileType);
     }
     public void RCDaS(String pathname) throws IOException,FileNotFoundException {
         byte[] bin = this.outRead(pathname);
         int aux = bin.length/nBytes;
         bin = this.correctErrors(bin);
-        String originalExtension ="";
-        byte[] bout = this.deHumminize(bin,originalExtension);
-        this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"SE"+originalExtension);
+        StringBuilder extensionBuilder = new StringBuilder();
+        byte[] bout = this.deHumminize(bin,extensionBuilder);
+        this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"SE"+"."+extensionBuilder.toString());
     }
     public void RDaS (String pathname) throws IOException,FileNotFoundException {
         byte[] bin = this.outRead(pathname);
         int aux = bin.length/nBytes;
-        String originalExtension="";
-        byte[] bout = this.deHumminize(bin,originalExtension);
-        this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"CE"+originalExtension);
+        StringBuilder extensionBuilder = new StringBuilder();
+        byte[] bout = this.deHumminize(bin,extensionBuilder);
+        this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"CE"+"."+extensionBuilder.toString());
     }
 }
