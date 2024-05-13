@@ -4,22 +4,25 @@
  */
 package GUI;
 
+import Hamming.HammingProcessor;
+
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
 /**
- *
  * @author franc
  */
 public class DesprotegerPanel extends Panel {
-    
-    private String path,name;
+
+    private String path, name;
     private boolean selected;
     File file;
+    HammingProcessor hm;
 
 
     /**
@@ -27,10 +30,13 @@ public class DesprotegerPanel extends Panel {
      */
     public DesprotegerPanel() {
         initComponents();
+        hm = new HammingProcessor();
     }
+
     @Override
     public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        textoArchivoTextArea.setText("");
+        selected = false;
     }
 
     /**
@@ -90,59 +96,114 @@ public class DesprotegerPanel extends Panel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(424, 424, 424)
-                        .addComponent(protegerLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(abrirAButton))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(desprotegerErrorButton)
-                        .addGap(152, 152, 152)
-                        .addComponent(desprotegerButton)))
-                .addContainerGap(306, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(424, 424, 424)
+                                                .addComponent(protegerLabel))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(111, 111, 111)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel2)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(abrirAButton))))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(140, 140, 140)
+                                                .addComponent(desprotegerErrorButton)
+                                                .addGap(152, 152, 152)
+                                                .addComponent(desprotegerButton)))
+                                .addContainerGap(306, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(protegerLabel)
-                .addGap(87, 87, 87)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(abrirAButton)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(desprotegerErrorButton)
-                    .addComponent(desprotegerButton))
-                .addContainerGap(212, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(protegerLabel)
+                                .addGap(87, 87, 87)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(abrirAButton)
+                                        .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(desprotegerErrorButton)
+                                        .addComponent(desprotegerButton))
+                                .addContainerGap(212, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private char validExtension(String extension) {
+        char auxChar = 'f';
+        Pattern pattern = Pattern.compile("^h([ae])[0-9]$");
+        Matcher matcher = pattern.matcher(extension);
+        if (matcher.matches()) {
+            auxChar = extension.charAt(1);
+        }
+        return auxChar;
+    }
+
+    private void configHm() {
+        String extension = path.substring(path.lastIndexOf('.') + 1);
+        char auxChar = this.validExtension(extension);
+        if (auxChar != 'f') {
+            int nBits = Integer.parseInt(extension.substring(extension.lastIndexOf(auxChar)+ 1));
+            if (nBits == 1) {
+                hm.setBlockSize(8);
+            } else if (nBits == 2) {
+                hm.setBlockSize(4096);
+            } else if (nBits == 3) {
+                hm.setBlockSize(65536);
+            } else {
+                hm.setBlockSize(nBits);
+            }
+        }
+    }
+
     private void abrirAButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirAButtonActionPerformed
-        // TODO add your handling code here:
+
+    }//GEN-LAST:event_abrirAButtonActionPerformed
+
+    private void desprotegerErrorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desprotegerErrorButtonMousePressed
+        if (selected) {
+            this.configHm();
+            try {
+                hm.RDaS(path);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }//GEN-LAST:event_desprotegerErrorButtonMousePressed
+
+    private void desprotegerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desprotegerButtonMousePressed
+        if (selected) {
+            this.configHm();
+            try {
+                hm.RCDaS(path);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }//GEN-LAST:event_desprotegerButtonMousePressed
+
+    private void desprotegerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desprotegerButtonActionPerformed
+
+    }//GEN-LAST:event_desprotegerButtonActionPerformed
+
+    private void abrirAButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButtonMousePressed
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         int r = j.showSaveDialog(null);
-
         if (r == JFileChooser.APPROVE_OPTION) {
-            selected =true;
+            selected = true;
             path = j.getSelectedFile().getAbsolutePath();
-            file= new File(path);
+            file = new File(path);
             name = j.getSelectedFile().getName();
             name = name.substring(0, name.lastIndexOf('.'));
             FileReader f;
-            BufferedReader b ;
+            BufferedReader b;
             try {
                 f = new FileReader(new File(path));
                 b = new BufferedReader(f);
@@ -154,36 +215,15 @@ public class DesprotegerPanel extends Panel {
                 f.close();
                 b.close();
                 textoArchivoTextArea.setText(s);
-            }
-            catch (FileNotFoundException ex) {
-            Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-            Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else {
-            selected =false;
-        }
-    }//GEN-LAST:event_abrirAButtonActionPerformed
-
-    private void desprotegerErrorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desprotegerErrorButtonMousePressed
-        if(selected){
-            Pattern pattern = Pattern.compile("^ha[0-9]$");
-            String extension = path.substring(path.lastIndexOf('.')+1);
+        } else {
+            selected = false;
 
         }
-    }//GEN-LAST:event_desprotegerErrorButtonMousePressed
-
-    private void desprotegerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desprotegerButtonMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_desprotegerButtonMousePressed
-
-    private void desprotegerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desprotegerButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_desprotegerButtonActionPerformed
-
-    private void abrirAButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButtonMousePressed
-        // TODO add your handling code here:
     }//GEN-LAST:event_abrirAButtonMousePressed
 
 
@@ -196,6 +236,5 @@ public class DesprotegerPanel extends Panel {
     private javax.swing.JTextArea textoArchivoTextArea;
     // End of variables declaration//GEN-END:variables
 
-    
-    
+
 }

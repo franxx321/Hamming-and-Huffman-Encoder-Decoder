@@ -32,7 +32,9 @@ public class PanelGUIHandler extends GUIHandler {
     public void changePanel(String panelKey) {
         JPanel panelPrincipal= Frame.getInstance().getPanelPrincipal();
         panelPrincipal.removeAll();
-        panelPrincipal.add(panels.get(panelKey));
+        Panel newPanel = panels.get(panelKey);
+        newPanel.init();
+        panelPrincipal.add(newPanel);
         Frame.getInstance().repaint();
         Frame.getInstance().revalidate();
 

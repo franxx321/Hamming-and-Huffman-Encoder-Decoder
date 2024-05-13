@@ -31,7 +31,8 @@ public class ProtegerPanel extends Panel {
     }
     @Override
     public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       textoArchivoTextArea.setText("");
+       selected=false;
     }
 
     /**
@@ -46,11 +47,12 @@ public class ProtegerPanel extends Panel {
         protegerLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         abrirAButton = new javax.swing.JButton();
-        textoArchivoTextArea = new javax.swing.JTextArea();
         protegerErrorButton = new javax.swing.JButton();
         protegerButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         blockSizeComboBox = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textoArchivoTextArea = new javax.swing.JTextArea();
 
         protegerLabel.setText("Proteger");
 
@@ -67,9 +69,6 @@ public class ProtegerPanel extends Panel {
                 abrirAButtonActionPerformed(evt);
             }
         });
-
-        textoArchivoTextArea.setColumns(20);
-        textoArchivoTextArea.setRows(5);
 
         protegerErrorButton.setText("Proteger c/errores");
         protegerErrorButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -94,6 +93,10 @@ public class ProtegerPanel extends Panel {
             }
         });
 
+        textoArchivoTextArea.setColumns(20);
+        textoArchivoTextArea.setRows(5);
+        jScrollPane1.setViewportView(textoArchivoTextArea);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,7 +109,6 @@ public class ProtegerPanel extends Panel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(111, 111, 111)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
@@ -114,12 +116,13 @@ public class ProtegerPanel extends Panel {
                                 .addGap(76, 76, 76)
                                 .addComponent(jLabel1)
                                 .addGap(35, 35, 35)
-                                .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(protegerErrorButton)
-                        .addGap(152, 152, 152)
-                        .addComponent(protegerButton)))
+                                .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(protegerErrorButton)
+                                .addGap(152, 152, 152)
+                                .addComponent(protegerButton))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(297, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,7 +138,7 @@ public class ProtegerPanel extends Panel {
                         .addComponent(jLabel1))
                     .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(protegerErrorButton)
@@ -145,7 +148,6 @@ public class ProtegerPanel extends Panel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void abrirAButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirAButtonActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_abrirAButtonActionPerformed
 
     private void protegerErrorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_protegerErrorButtonMousePressed
@@ -205,7 +207,6 @@ public class ProtegerPanel extends Panel {
     }//GEN-LAST:event_abrirAButtonMousePressed
 
     private void blockSizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockSizeComboBoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_blockSizeComboBoxActionPerformed
 
 
@@ -214,6 +215,7 @@ public class ProtegerPanel extends Panel {
     private javax.swing.JComboBox<String> blockSizeComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton protegerButton;
     private javax.swing.JButton protegerErrorButton;
     private javax.swing.JLabel protegerLabel;
