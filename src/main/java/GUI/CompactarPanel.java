@@ -4,6 +4,13 @@
  */
 package GUI;
 
+import Huffmann.Huffman;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
@@ -14,6 +21,7 @@ import javax.swing.filechooser.FileSystemView;
 public class CompactarPanel extends Panel {
 
     private String path;
+    private String name;
 
     /**
      * Creates new form CompactarPanel
@@ -21,7 +29,6 @@ public class CompactarPanel extends Panel {
     public CompactarPanel() {
         initComponents();
         TextoArchivoTextArea.setEnabled(false);
-        
     }
 
     /**
@@ -108,9 +115,26 @@ public class CompactarPanel extends Panel {
 
         if (r == JFileChooser.APPROVE_OPTION) {
             path = j.getSelectedFile().getAbsolutePath();
+            name = j.getSelectedFile().getName();
+            name = name.substring(0, name.lastIndexOf('.'));
             ArchivoLabel.setText(path);
-        } 
-        else {
+            try {
+                String s = "", cadena = "";
+                FileReader f = new FileReader(path);
+                BufferedReader b = new BufferedReader(f);
+
+                while ((cadena = b.readLine()) != null) {
+                    s += cadena + "\n";
+                }
+
+                TextoArchivoTextArea.setText(s);
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
             ArchivoLabel.setText("No se cargo nada");
         }
 
@@ -118,8 +142,9 @@ public class CompactarPanel extends Panel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Huffman huf = new Huffman();
+        huf.comprimir(path, name);
     }//GEN-LAST:event_jButton1ActionPerformed
-
 
     @Override
     public void init() {
