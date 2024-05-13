@@ -142,7 +142,7 @@ public class Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void HammingButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HammingButtonMousePressed
-        // TODO add your handling code here:
+        SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.hammingSecundario);
     }//GEN-LAST:event_HammingButtonMousePressed
 
     private void HuffmannButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HuffmannButtonMousePressed

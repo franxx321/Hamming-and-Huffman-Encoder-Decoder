@@ -1,6 +1,7 @@
 package Utils;
 
 import GUI.Frame;
+import GUI.HammingSecundario;
 import GUI.HuffmanSecundario;
 import GUI.Panel;
 
@@ -23,6 +24,7 @@ public class SMenuGUIHandler extends GUIHandler{
     private SMenuGUIHandler(){
         panels=new HashMap<>();
         panels.put(SMenuGUIHandler.huffmanSecundario,new HuffmanSecundario());
+        panels.put(SMenuGUIHandler.hammingSecundario, new HammingSecundario());
     }
 
     HashMap<String, Panel> panels;

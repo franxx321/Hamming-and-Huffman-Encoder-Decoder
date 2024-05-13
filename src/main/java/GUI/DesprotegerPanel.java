@@ -4,7 +4,10 @@
  */
 package GUI;
 
-import java.io.File;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
@@ -14,9 +17,10 @@ import javax.swing.filechooser.FileSystemView;
  */
 public class DesprotegerPanel extends Panel {
     
-    private String path;
-    private boolean opened;
-    File file; 
+    private String path,name;
+    private boolean selected;
+    File file;
+
 
     /**
      * Creates new form ProtegerPanel
@@ -43,7 +47,6 @@ public class DesprotegerPanel extends Panel {
         abrirAButton = new javax.swing.JButton();
         textoArchivoTextArea = new javax.swing.JTextArea();
         desprotegerErrorButton = new javax.swing.JButton();
-        archivoLabel = new javax.swing.JLabel();
         desprotegerButton = new javax.swing.JButton();
 
         protegerLabel.setText("Desproteger");
@@ -100,15 +103,13 @@ public class DesprotegerPanel extends Panel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(abrirAButton)
-                                .addGap(130, 130, 130)
-                                .addComponent(archivoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(abrirAButton))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addComponent(desprotegerErrorButton)
                         .addGap(152, 152, 152)
                         .addComponent(desprotegerButton)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,11 +117,9 @@ public class DesprotegerPanel extends Panel {
                 .addGap(32, 32, 32)
                 .addComponent(protegerLabel)
                 .addGap(87, 87, 87)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(abrirAButton)
-                        .addComponent(jLabel2))
-                    .addComponent(archivoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(abrirAButton)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -137,19 +136,42 @@ public class DesprotegerPanel extends Panel {
         int r = j.showSaveDialog(null);
 
         if (r == JFileChooser.APPROVE_OPTION) {
-            opened=true;
+            selected =true;
             path = j.getSelectedFile().getAbsolutePath();
-            archivoLabel.setText(path);
             file= new File(path);
+            name = j.getSelectedFile().getName();
+            name = name.substring(0, name.lastIndexOf('.'));
+            FileReader f;
+            BufferedReader b ;
+            try {
+                f = new FileReader(new File(path));
+                b = new BufferedReader(f);
+                String s = "", cadena = "";
+
+                while ((cadena = b.readLine()) != null) {
+                    s += cadena + "\n";
+                }
+                f.close();
+                b.close();
+                textoArchivoTextArea.setText(s);
+            }
+            catch (FileNotFoundException ex) {
+            Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+            Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else {
-            archivoLabel.setText("No se cargo nada");
-            opened=false;
+            selected =false;
         }
     }//GEN-LAST:event_abrirAButtonActionPerformed
 
     private void desprotegerErrorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desprotegerErrorButtonMousePressed
-        // TODO add your handling code here:
+        if(selected){
+            Pattern pattern = Pattern.compile("^ha[0-9]$");
+            String extension = path.substring(path.lastIndexOf('.')+1);
+
+        }
     }//GEN-LAST:event_desprotegerErrorButtonMousePressed
 
     private void desprotegerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desprotegerButtonMousePressed
@@ -167,7 +189,6 @@ public class DesprotegerPanel extends Panel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirAButton;
-    private javax.swing.JLabel archivoLabel;
     private javax.swing.JButton desprotegerButton;
     private javax.swing.JButton desprotegerErrorButton;
     private javax.swing.JLabel jLabel2;

@@ -6,8 +6,9 @@ package GUI;
 
 import Hamming.HammingProcessor;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
@@ -17,7 +18,7 @@ import javax.swing.filechooser.FileSystemView;
  */
 public class ProtegerPanel extends Panel {
     
-    private String path;
+    private String path,name;
     private boolean selected;
     File file;
     private HammingProcessor hm;
@@ -47,7 +48,6 @@ public class ProtegerPanel extends Panel {
         abrirAButton = new javax.swing.JButton();
         textoArchivoTextArea = new javax.swing.JTextArea();
         protegerErrorButton = new javax.swing.JButton();
-        archivoLabel = new javax.swing.JLabel();
         protegerButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         blockSizeComboBox = new javax.swing.JComboBox<>();
@@ -114,15 +114,13 @@ public class ProtegerPanel extends Panel {
                                 .addGap(76, 76, 76)
                                 .addComponent(jLabel1)
                                 .addGap(35, 35, 35)
-                                .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(archivoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addComponent(protegerErrorButton)
                         .addGap(152, 152, 152)
                         .addComponent(protegerButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +133,6 @@ public class ProtegerPanel extends Panel {
                         .addComponent(abrirAButton)
                         .addComponent(jLabel2)
                         .addComponent(jLabel1))
-                    .addComponent(archivoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,19 +146,6 @@ public class ProtegerPanel extends Panel {
 
     private void abrirAButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirAButtonActionPerformed
         // TODO add your handling code here:
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int r = j.showSaveDialog(null);
-
-        if (r == JFileChooser.APPROVE_OPTION) {
-            selected =true;
-            path = j.getSelectedFile().getAbsolutePath();
-            archivoLabel.setText(path);
-            file= new File(path);
-        }
-        else {
-            archivoLabel.setText("No se cargo nada");
-            selected =false;
-        }
     }//GEN-LAST:event_abrirAButtonActionPerformed
 
     private void protegerErrorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_protegerErrorButtonMousePressed
@@ -189,7 +173,35 @@ public class ProtegerPanel extends Panel {
     }//GEN-LAST:event_protegerButtonMousePressed
 
     private void abrirAButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButtonMousePressed
-        // TODO add your handling code here:
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        int r = j.showSaveDialog(null);
+
+        if (r == JFileChooser.APPROVE_OPTION) {
+            selected =true;
+            path = j.getSelectedFile().getAbsolutePath();
+            file= new File(path);
+            name = j.getSelectedFile().getName();
+            name = name.substring(0, name.lastIndexOf('.'));
+            try {
+                String s = "", cadena = "";
+                FileReader f = new FileReader(path);
+                BufferedReader b = new BufferedReader(f);
+
+                while ((cadena = b.readLine()) != null) {
+                    s += cadena + "\n";
+                }
+                b.close();
+                f.close();
+                textoArchivoTextArea.setText(s);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            selected =false;
+        }
     }//GEN-LAST:event_abrirAButtonMousePressed
 
     private void blockSizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockSizeComboBoxActionPerformed
@@ -199,7 +211,6 @@ public class ProtegerPanel extends Panel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirAButton;
-    private javax.swing.JLabel archivoLabel;
     private javax.swing.JComboBox<String> blockSizeComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

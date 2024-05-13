@@ -263,7 +263,7 @@ public class HammingProcessor {
         byte[] bin = this.inRead(pathname);
         byte[] bout = this.humminize(bin);
         bout =this.introduceErrors( bout,probability);
-        this.inWrite(bout, pathname.substring(0,pathname.indexOf('.'))+fileType);
+        this.inWrite(bout, pathname.substring(0,pathname.lastIndexOf('.'))+fileType);
     }
 
     public void RCDaS(String pathname) throws IOException,FileNotFoundException {
