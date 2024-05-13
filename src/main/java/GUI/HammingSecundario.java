@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import Utils.PanelGUIHandler;
+
 /**
  *
  * @author franc
@@ -36,10 +38,25 @@ public class HammingSecundario extends Panel {
         compararButton = new javax.swing.JButton();
 
         protegerButton.setText("Proteger");
+        protegerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                protegerButtonMousePressed(evt);
+            }
+        });
 
         desprotegerButton.setText("Desproteger");
+        desprotegerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                desprotegerButtonMousePressed(evt);
+            }
+        });
 
         compararButton.setText("Comparar");
+        compararButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                compararButtonMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -65,6 +82,18 @@ public class HammingSecundario extends Panel {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void protegerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_protegerButtonMousePressed
+        PanelGUIHandler.getInstance().changePanel(PanelGUIHandler.panelProteger);
+    }//GEN-LAST:event_protegerButtonMousePressed
+
+    private void desprotegerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desprotegerButtonMousePressed
+        PanelGUIHandler.getInstance().changePanel(PanelGUIHandler.panelDesproteger);
+    }//GEN-LAST:event_desprotegerButtonMousePressed
+
+    private void compararButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_compararButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_compararButtonMousePressed
 
     
 

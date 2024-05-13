@@ -198,7 +198,8 @@ public class Frame extends javax.swing.JFrame {
             public void run()   {
                Frame f1 =Frame.getInstance();
                f1.setVisible(true);
-                HammingProcessor hm = new HammingProcessor(4096);
+                HammingProcessor hm = new HammingProcessor();
+                hm.setBlockSize(4096);
                 try {
                     hm.RHaS("fran.txt");
                     hm.RHIEaS("fran.txt",1);

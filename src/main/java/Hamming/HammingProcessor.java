@@ -13,17 +13,20 @@ public class HammingProcessor {
         return r;
     }
 
-    public HammingProcessor(int nBits){
-        this.nBits =nBits;
-        nBytes=nBits/8;
-        cBits= HammingProcessor.rLog2(nBits);
-        cBytes=((float)cBits)/8;
+    public HammingProcessor(){
+
     }
 
     private  int nBits ,nBytes,cBits ,nHB,sbits =32, sbytes =sbits/8;
 
 
     private float cBytes;
+
+    private void setInternalValues(){
+        this.nBytes=this.nBits/8;
+        this.cBits= HammingProcessor.rLog2(this.nBits);
+        this.cBytes=((float)cBits)/8;
+    }
 
 
     private byte[] outRead(String pathName) throws IOException,FileNotFoundException {
@@ -220,6 +223,11 @@ public class HammingProcessor {
             return bin;
     }
 
+    public void setBlockSize(int nBits){
+        this.nBits = nBits;
+        this.setInternalValues();
+    }
+
     public void RHaS(String pathname) throws IOException,FileNotFoundException {
 
         byte[] bin = this.inRead(pathname);
@@ -257,6 +265,7 @@ public class HammingProcessor {
         bout =this.introduceErrors( bout,probability);
         this.inWrite(bout, pathname.substring(0,pathname.indexOf('.'))+fileType);
     }
+
     public void RCDaS(String pathname) throws IOException,FileNotFoundException {
         byte[] bin = this.outRead(pathname);
         int aux = bin.length/nBytes;
@@ -265,6 +274,7 @@ public class HammingProcessor {
         byte[] bout = this.deHumminize(bin,extensionBuilder);
         this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"SE"+"."+extensionBuilder.toString());
     }
+
     public void RDaS (String pathname) throws IOException,FileNotFoundException {
         byte[] bin = this.outRead(pathname);
         int aux = bin.length/nBytes;

@@ -42,15 +42,20 @@ public class DesprotegerPanel extends Panel {
         jLabel2 = new javax.swing.JLabel();
         abrirAButton = new javax.swing.JButton();
         textoArchivoTextArea = new javax.swing.JTextArea();
-        protegerErrorButton = new javax.swing.JButton();
+        desprotegerErrorButton = new javax.swing.JButton();
         archivoLabel = new javax.swing.JLabel();
-        protegerButton = new javax.swing.JButton();
+        desprotegerButton = new javax.swing.JButton();
 
-        protegerLabel.setText("Proteger");
+        protegerLabel.setText("Desproteger");
 
         jLabel2.setText("Seleccionar archivo: ");
 
         abrirAButton.setText("Abrir Archivo");
+        abrirAButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                abrirAButtonMousePressed(evt);
+            }
+        });
         abrirAButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirAButtonActionPerformed(evt);
@@ -60,17 +65,22 @@ public class DesprotegerPanel extends Panel {
         textoArchivoTextArea.setColumns(20);
         textoArchivoTextArea.setRows(5);
 
-        protegerErrorButton.setText("Proteger c/errores");
-        protegerErrorButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        desprotegerErrorButton.setText("Desproteger c/errores");
+        desprotegerErrorButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                protegerErrorButtonMousePressed(evt);
+                desprotegerErrorButtonMousePressed(evt);
             }
         });
 
-        protegerButton.setText("Proteger s/errores");
-        protegerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        desprotegerButton.setText("Desproteger s/errores");
+        desprotegerButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                protegerButtonMousePressed(evt);
+                desprotegerButtonMousePressed(evt);
+            }
+        });
+        desprotegerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desprotegerButtonActionPerformed(evt);
             }
         });
 
@@ -89,15 +99,15 @@ public class DesprotegerPanel extends Panel {
                             .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(116, 116, 116)
+                                .addGap(18, 18, 18)
                                 .addComponent(abrirAButton)
-                                .addGap(32, 32, 32)
+                                .addGap(130, 130, 130)
                                 .addComponent(archivoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(140, 140, 140)
-                        .addComponent(protegerErrorButton)
+                        .addComponent(desprotegerErrorButton)
                         .addGap(152, 152, 152)
-                        .addComponent(protegerButton)))
+                        .addComponent(desprotegerButton)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -115,8 +125,8 @@ public class DesprotegerPanel extends Panel {
                 .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(protegerErrorButton)
-                    .addComponent(protegerButton))
+                    .addComponent(desprotegerErrorButton)
+                    .addComponent(desprotegerButton))
                 .addContainerGap(212, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -138,21 +148,29 @@ public class DesprotegerPanel extends Panel {
         }
     }//GEN-LAST:event_abrirAButtonActionPerformed
 
-    private void protegerErrorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_protegerErrorButtonMousePressed
+    private void desprotegerErrorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desprotegerErrorButtonMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_protegerErrorButtonMousePressed
+    }//GEN-LAST:event_desprotegerErrorButtonMousePressed
 
-    private void protegerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_protegerButtonMousePressed
+    private void desprotegerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desprotegerButtonMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_protegerButtonMousePressed
+    }//GEN-LAST:event_desprotegerButtonMousePressed
+
+    private void desprotegerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desprotegerButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_desprotegerButtonActionPerformed
+
+    private void abrirAButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_abrirAButtonMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirAButton;
     private javax.swing.JLabel archivoLabel;
+    private javax.swing.JButton desprotegerButton;
+    private javax.swing.JButton desprotegerErrorButton;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JButton protegerButton;
-    private javax.swing.JButton protegerErrorButton;
     private javax.swing.JLabel protegerLabel;
     private javax.swing.JTextArea textoArchivoTextArea;
     // End of variables declaration//GEN-END:variables

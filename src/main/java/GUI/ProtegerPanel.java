@@ -4,7 +4,10 @@
  */
 package GUI;
 
+import Hamming.HammingProcessor;
+
 import java.io.File;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
@@ -15,14 +18,15 @@ import javax.swing.filechooser.FileSystemView;
 public class ProtegerPanel extends Panel {
     
     private String path;
-    private boolean opened;
-    File file; 
-
+    private boolean selected;
+    File file;
+    private HammingProcessor hm;
     /**
      * Creates new form ProtegerPanel
      */
     public ProtegerPanel() {
         initComponents();
+        hm= new HammingProcessor();
     }
     @Override
     public void init() {
@@ -45,12 +49,19 @@ public class ProtegerPanel extends Panel {
         protegerErrorButton = new javax.swing.JButton();
         archivoLabel = new javax.swing.JLabel();
         protegerButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        blockSizeComboBox = new javax.swing.JComboBox<>();
 
         protegerLabel.setText("Proteger");
 
         jLabel2.setText("Seleccionar archivo: ");
 
         abrirAButton.setText("Abrir Archivo");
+        abrirAButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                abrirAButtonMousePressed(evt);
+            }
+        });
         abrirAButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirAButtonActionPerformed(evt);
@@ -74,6 +85,15 @@ public class ProtegerPanel extends Panel {
             }
         });
 
+        jLabel1.setText("Tamaño de bloque");
+
+        blockSizeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8", "4096", "65536" }));
+        blockSizeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blockSizeComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,16 +109,20 @@ public class ProtegerPanel extends Panel {
                             .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(116, 116, 116)
+                                .addGap(18, 18, 18)
                                 .addComponent(abrirAButton)
-                                .addGap(32, 32, 32)
+                                .addGap(76, 76, 76)
+                                .addComponent(jLabel1)
+                                .addGap(35, 35, 35)
+                                .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(archivoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addComponent(protegerErrorButton)
                         .addGap(152, 152, 152)
                         .addComponent(protegerButton)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,8 +133,10 @@ public class ProtegerPanel extends Panel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(abrirAButton)
-                        .addComponent(jLabel2))
-                    .addComponent(archivoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1))
+                    .addComponent(archivoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -127,29 +153,55 @@ public class ProtegerPanel extends Panel {
         int r = j.showSaveDialog(null);
 
         if (r == JFileChooser.APPROVE_OPTION) {
-            opened=true;
+            selected =true;
             path = j.getSelectedFile().getAbsolutePath();
             archivoLabel.setText(path);
             file= new File(path);
         }
         else {
             archivoLabel.setText("No se cargo nada");
-            opened=false;
+            selected =false;
         }
     }//GEN-LAST:event_abrirAButtonActionPerformed
 
     private void protegerErrorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_protegerErrorButtonMousePressed
-        // TODO add your handling code here:
+        if (selected){
+            hm.setBlockSize(Integer.parseInt(blockSizeComboBox.getItemAt(blockSizeComboBox.getSelectedIndex())));
+            try {
+                hm.RHIEaS(path,1);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
     }//GEN-LAST:event_protegerErrorButtonMousePressed
 
     private void protegerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_protegerButtonMousePressed
-        // TODO add your handling code here:
+        if (selected){
+            hm.setBlockSize(Integer.parseInt(blockSizeComboBox.getItemAt(blockSizeComboBox.getSelectedIndex())));
+            try {
+                hm.RHaS(path);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }//GEN-LAST:event_protegerButtonMousePressed
+
+    private void abrirAButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_abrirAButtonMousePressed
+
+    private void blockSizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockSizeComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_blockSizeComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirAButton;
     private javax.swing.JLabel archivoLabel;
+    private javax.swing.JComboBox<String> blockSizeComboBox;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton protegerButton;
     private javax.swing.JButton protegerErrorButton;

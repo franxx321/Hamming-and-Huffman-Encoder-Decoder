@@ -46,16 +46,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Proteger"/>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="protegerButtonMousePressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="desprotegerButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Desproteger"/>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="desprotegerButtonMousePressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="compararButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Comparar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="compararButtonMousePressed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

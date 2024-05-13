@@ -1,8 +1,6 @@
 package Utils;
 
-import GUI.CompactarPanel;
-import GUI.Frame;
-import GUI.Panel;
+import GUI.*;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -13,11 +11,13 @@ public class PanelGUIHandler extends GUIHandler {
 
     private static PanelGUIHandler instance;
 
-    public static String PanelCompactar ="Panel Compactar";
+    public static String PanelCompactar ="Panel Compactar",panelProteger = "Panel proteger", panelDesproteger = "Panel desproteger";
 
     private PanelGUIHandler(){
         panels = new HashMap<>();
         panels.put(PanelGUIHandler.PanelCompactar,new CompactarPanel());
+        panels.put(PanelGUIHandler.panelProteger, new ProtegerPanel());
+        panels.put(PanelGUIHandler.panelDesproteger,new DesprotegerPanel());
     }
 
     public static PanelGUIHandler getInstance(){

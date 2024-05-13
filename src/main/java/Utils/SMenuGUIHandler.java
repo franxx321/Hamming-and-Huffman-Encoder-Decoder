@@ -11,7 +11,7 @@ public class SMenuGUIHandler extends GUIHandler{
 
     private static SMenuGUIHandler instance;
 
-    public static String huffmanSecundario = "Huffman Secundario";
+    public static String huffmanSecundario = "Huffman Secundario",hammingSecundario = "Hamming secundario";
 
     public static SMenuGUIHandler getInstance(){
         if(instance==null){
