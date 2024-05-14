@@ -122,11 +122,9 @@ public class CompactarPanel extends Panel {
                 String s = "", cadena = "";
                 FileReader f = new FileReader(path);
                 BufferedReader b = new BufferedReader(f);
-
                 while ((cadena = b.readLine()) != null) {
                     s += cadena + "\n";
                 }
-
                 TextoArchivoTextArea.setText(s);
 
             } catch (FileNotFoundException ex) {

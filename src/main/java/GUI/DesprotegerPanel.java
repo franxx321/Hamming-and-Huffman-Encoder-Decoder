@@ -51,9 +51,10 @@ public class DesprotegerPanel extends Panel {
         protegerLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         abrirAButton = new javax.swing.JButton();
-        textoArchivoTextArea = new javax.swing.JTextArea();
         desprotegerErrorButton = new javax.swing.JButton();
         desprotegerButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textoArchivoTextArea = new javax.swing.JTextArea();
 
         protegerLabel.setText("Desproteger");
 
@@ -70,9 +71,6 @@ public class DesprotegerPanel extends Panel {
                 abrirAButtonActionPerformed(evt);
             }
         });
-
-        textoArchivoTextArea.setColumns(20);
-        textoArchivoTextArea.setRows(5);
 
         desprotegerErrorButton.setText("Desproteger c/errores");
         desprotegerErrorButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -93,46 +91,50 @@ public class DesprotegerPanel extends Panel {
             }
         });
 
+        textoArchivoTextArea.setColumns(20);
+        textoArchivoTextArea.setRows(5);
+        jScrollPane1.setViewportView(textoArchivoTextArea);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(424, 424, 424)
-                                                .addComponent(protegerLabel))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(111, 111, 111)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(jLabel2)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(abrirAButton))))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(140, 140, 140)
-                                                .addComponent(desprotegerErrorButton)
-                                                .addGap(152, 152, 152)
-                                                .addComponent(desprotegerButton)))
-                                .addContainerGap(306, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(424, 424, 424)
+                        .addComponent(protegerLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(abrirAButton))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(desprotegerErrorButton)
+                        .addGap(152, 152, 152)
+                        .addComponent(desprotegerButton)))
+                .addContainerGap(563, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(protegerLabel)
-                                .addGap(87, 87, 87)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(abrirAButton)
-                                        .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(desprotegerErrorButton)
-                                        .addComponent(desprotegerButton))
-                                .addContainerGap(212, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(protegerLabel)
+                .addGap(87, 87, 87)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(abrirAButton)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(desprotegerErrorButton)
+                    .addComponent(desprotegerButton))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -232,6 +234,7 @@ public class DesprotegerPanel extends Panel {
     private javax.swing.JButton desprotegerButton;
     private javax.swing.JButton desprotegerErrorButton;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel protegerLabel;
     private javax.swing.JTextArea textoArchivoTextArea;
     // End of variables declaration//GEN-END:variables
