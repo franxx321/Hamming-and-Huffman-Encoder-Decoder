@@ -3,8 +3,13 @@ package Hamming;
 import java.io.*;
 import java.util.Random;
 
+
+//CDESC esta clase maneja todas las operaciones relacionadas con Hamming
 public class HammingProcessor {
 
+
+
+    //CODESC Esta funcion genera un logaritmo "con techo" en base 2
     private static int rLog2(int n){
         int r = 31 - Integer.numberOfLeadingZeros(n);
         if (n> Math.pow(2,r)){
@@ -17,18 +22,26 @@ public class HammingProcessor {
 
     }
 
+    //VDESC las variables manejan la cantidad de bits total, de control, de espacio y lo en bytes
     private  int nBits ,nBytes,cBits ,nHB,sbits =32, sbytes =sbits/8;
 
-
+    //VDESC numero de bytes de control, puede ser una fraccion, por lo que es un float
     private float cBytes;
 
+    //CODESC setea el tamaño del bloque de hamming
+    public void setBlockSize(int nBits){
+        this.nBits = nBits;
+        this.setInternalValues();
+    }
+
+    //CODESC setea los valores internos a su valor necesario
     private void setInternalValues(){
         this.nBytes=this.nBits/8;
         this.cBits= HammingProcessor.rLog2(this.nBits);
         this.cBytes=((float)cBits)/8;
     }
 
-
+    //CODESC Lee un archivo sin incluir su tamaño ni su extension
     private byte[] outRead(String pathName) throws IOException,FileNotFoundException {
         File f1 = new File(pathName);
         FileInputStream fis = new FileInputStream(f1);
@@ -38,6 +51,7 @@ public class HammingProcessor {
         return bin;
     }
 
+    //CODESC lee un archivo introduciendo en los primeros bytes su tamaño(en bytes), la longitud de su extension(max 255) y la extension
     private byte[] inRead(String pathName) throws  IOException , FileNotFoundException{
         File f1 = new File(pathName);
         FileInputStream fis = new FileInputStream(f1);
@@ -61,12 +75,14 @@ public class HammingProcessor {
         return bin;
     }
 
+    //CODESC escribe un arreglo de bytes en un archivo
     private void inWrite(byte[] bout, String pathName) throws IOException, FileNotFoundException {
         FileOutputStream fos = new FileOutputStream(new File(pathName));
         fos.write(bout);
         fos.close();
     }
 
+    //CODESC escribe un arreglo de bytes en un archivo, remueve las primeras posiciones(que poseen tamaño y extension del archivo)
     private void outWrite(byte [] bout,String pathName) throws IOException, FileNotFoundException{
         FileOutputStream fos = new FileOutputStream(new File(pathName));
         String extension=pathName.substring(pathName.lastIndexOf('.')+1);
@@ -74,6 +90,7 @@ public class HammingProcessor {
         fos.close();
     }
 
+    //CODESC humminiza el archivo
     private byte[] humminize(byte[] bin){
         float aux2 = cBytes+(1f/8f);
         int nHB = (int)Math.ceil(bin.length/(nBytes - aux2));
@@ -112,6 +129,8 @@ public class HammingProcessor {
         }
         return binter;
     }
+
+    //CODESC deshumminiza el archivo(no corrije los errores)
     private byte[] deHumminize(byte[] bin, StringBuilder extensionBuilder){
         extensionBuilder.delete(0,extensionBuilder.length());
         nHB = bin.length/nBytes;
@@ -196,6 +215,7 @@ public class HammingProcessor {
      return bout;
     }
 
+    //CODESC introduce errores a un archivo humminizado
     private byte[] introduceErrors(byte[] bin,int probability){
         Random rand = new Random(System.currentTimeMillis());
         nHB= bin.length/nBytes;
@@ -207,7 +227,7 @@ public class HammingProcessor {
         }
         return bin;
     }
-
+    //CODESC corrige los errores de un archivo humminizado
     private byte[] correctErrors(byte[] bin) {
         nHB= bin.length/nBytes;
         for(int i =0 ; i<nHB;i++){
@@ -223,11 +243,8 @@ public class HammingProcessor {
             return bin;
     }
 
-    public void setBlockSize(int nBits){
-        this.nBits = nBits;
-        this.setInternalValues();
-    }
 
+    //CODESC Read Humminize and Save: lee, humminiza y guarda un archivo
     public void RHaS(String pathname) throws IOException,FileNotFoundException {
 
         byte[] bin = this.inRead(pathname);
@@ -246,8 +263,8 @@ public class HammingProcessor {
         this.inWrite(bout, pathname.substring(0,pathname.indexOf('.'))+fileType);
     }
 
+    //CODESC Read Humminize Introduce Errors and Save: idem RHaS pero introduce errores
     public void RHIEaS(String pathname,int probability) throws IOException, FileNotFoundException {
-
         String fileType="";
         if(nBits == 8){
             fileType=".he1";
@@ -266,6 +283,7 @@ public class HammingProcessor {
         this.inWrite(bout, pathname.substring(0,pathname.lastIndexOf('.'))+fileType);
     }
 
+    //CODESC Read Correct Dehuminize and Save: lee corrige errores, deshuminiza y guarda un archivo
     public void RCDaS(String pathname) throws IOException,FileNotFoundException {
         byte[] bin = this.outRead(pathname);
         int aux = bin.length/nBytes;
@@ -275,6 +293,7 @@ public class HammingProcessor {
         this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"SE"+"."+extensionBuilder.toString());
     }
 
+    //CODESC Read Dehuminize and save: idem RCDaS pero sin corregir errores
     public void RDaS (String pathname) throws IOException,FileNotFoundException {
         byte[] bin = this.outRead(pathname);
         int aux = bin.length/nBytes;
