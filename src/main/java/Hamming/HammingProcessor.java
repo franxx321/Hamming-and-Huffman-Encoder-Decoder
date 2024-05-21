@@ -1,5 +1,7 @@
 package Hamming;
 
+import Utils.DoubleErrorException;
+
 import java.io.*;
 import java.util.Random;
 
@@ -19,11 +21,15 @@ public class HammingProcessor {
     }
 
     public HammingProcessor(){
-
     }
 
     //VDESC las variables manejan la cantidad de bits total, de control, de espacio y lo en bytes
-    private  int nBits ,nBytes,cBits ,nHB,sbits =32, sbytes =sbits/8;
+    private  int nBits;
+    private int nBytes;
+    private int cBits;
+    private int nHB;
+    private final int sbits =32;
+    private final int sbytes =sbits/8;
 
     //VDESC numero de bytes de control, puede ser una fraccion, por lo que es un float
     private float cBytes;
@@ -113,11 +119,13 @@ public class HammingProcessor {
         }
 
         for (int i = 0; i <nHB;i++){
+            int aux3=0;
             int aux=0;
             for (int j = 0;j< nBits;j++){
                 int l = i* nBytes +(j/8);
                 int m = j%8;
                 aux = aux ^ (((binter[l]>>>m)&0x1)*(j+1));
+                aux3+=((binter[l]>>>m)&0x1);
             }
             for(int k = 0; k< cBits; k++){
                 int z =((1<<k)-1);
@@ -126,11 +134,13 @@ public class HammingProcessor {
                 int n = m<<(z%8);
                 binter[l]=  (byte)(binter[l] | n);
             }
+            aux3=aux3%2;
+            binter[(i*nBytes)+((nBits-1)/8)] = (byte)(binter[(i*nBytes)+((nBits-1)/8)] ^ aux3<<((nBits-1)%8));
         }
         return binter;
     }
 
-    //CODESC deshumminiza el archivo(no corrije los errores)
+    //CODESC deshumminiza el archivo(no corrige los errores)
     private byte[] deHumminize(byte[] bin, StringBuilder extensionBuilder){
         extensionBuilder.delete(0,extensionBuilder.length());
         nHB = bin.length/nBytes;
@@ -221,6 +231,12 @@ public class HammingProcessor {
         nHB= bin.length/nBytes;
         for(int i=0; i<nHB;i++){
             if((int)(rand.nextDouble()*probability)==0){
+                if((int)(rand.nextDouble()*probability)==0){
+                    int r = (int)((rand.nextDouble())*nBits);
+                    bin[(i* nBytes)+(r/8)] = (byte)(bin[(i* nBytes)+(r/8)] ^ (0x1<<(r%8)));
+                    r = (int)((rand.nextDouble())*nBits);
+                    bin[(i* nBytes)+(r/8)] = (byte)(bin[(i* nBytes)+(r/8)] ^ (0x1<<(r%8)));
+                }
                 int r = (int)((rand.nextDouble())*nBits);
                 bin[(i* nBytes)+(r/8)] = (byte)(bin[(i* nBytes)+(r/8)] ^ (0x1<<(r%8)));
             }
@@ -231,13 +247,20 @@ public class HammingProcessor {
     private byte[] correctErrors(byte[] bin) {
         nHB= bin.length/nBytes;
         for(int i =0 ; i<nHB;i++){
+            int aux2 =0;
             int aux=0;
-            for (int j = 0;j< nBits;j++){
+            for (int j = 0;j< nBits-1;j++){
                 aux = aux^ (((bin[(i* nBytes)+(j/8)])>>>j%8)&0x1)*(j+1);
+                aux2+=(((bin[(i* nBytes)+(j/8)])>>>j%8)&0x1);
             }
             if(aux>0){
-                aux--;
-                bin[(i* nBytes) + (aux/8)]= (byte)(bin[(i* nBytes) + aux/8] ^ (0x1)<<aux%8);
+                if (aux2%2==0){
+                    aux--;
+                    bin[(i* nBytes) + (aux/8)]= (byte)(bin[(i* nBytes) + aux/8] ^ (0x1)<<aux%8);
+                }
+                else{
+                    throw new DoubleErrorException();
+                }
             }
         }
             return bin;
@@ -249,7 +272,7 @@ public class HammingProcessor {
 
         byte[] bin = this.inRead(pathname);
         byte[] bout = this.humminize(bin);
-        String fileType="";
+        String fileType;
         if(nBits == 8){
             fileType=".ha1";
         } else if (nBits==4096) {
@@ -258,14 +281,15 @@ public class HammingProcessor {
             fileType=".ha3";
         }
         else {
-            fileType =(".ha"+Integer.toString(nBits));
+            fileType =(".ha"+nBits);
         }
+        bout= this.correctErrors(bout);
         this.inWrite(bout, pathname.substring(0,pathname.indexOf('.'))+fileType);
     }
 
     //CODESC Read Humminize Introduce Errors and Save: idem RHaS pero introduce errores
     public void RHIEaS(String pathname,int probability) throws IOException, FileNotFoundException {
-        String fileType="";
+        String fileType;
         if(nBits == 8){
             fileType=".he1";
         } else if (nBits==4096) {
@@ -274,7 +298,7 @@ public class HammingProcessor {
             fileType=".he3";
         }
         else {
-            fileType =(".he"+Integer.toString(nBits));
+            fileType =(".he"+nBits);
         }
 
         byte[] bin = this.inRead(pathname);
@@ -286,19 +310,17 @@ public class HammingProcessor {
     //CODESC Read Correct Dehuminize and Save: lee corrige errores, deshuminiza y guarda un archivo
     public void RCDaS(String pathname) throws IOException,FileNotFoundException {
         byte[] bin = this.outRead(pathname);
-        int aux = bin.length/nBytes;
         bin = this.correctErrors(bin);
         StringBuilder extensionBuilder = new StringBuilder();
         byte[] bout = this.deHumminize(bin,extensionBuilder);
-        this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"SE"+"."+extensionBuilder.toString());
+        this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"SE"+"."+extensionBuilder);
     }
 
     //CODESC Read Dehuminize and save: idem RCDaS pero sin corregir errores
     public void RDaS (String pathname) throws IOException,FileNotFoundException {
         byte[] bin = this.outRead(pathname);
-        int aux = bin.length/nBytes;
         StringBuilder extensionBuilder = new StringBuilder();
         byte[] bout = this.deHumminize(bin,extensionBuilder);
-        this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"CE"+"."+extensionBuilder.toString());
+        this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"CE"+"."+extensionBuilder);
     }
 }

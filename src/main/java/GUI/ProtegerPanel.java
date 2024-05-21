@@ -154,7 +154,7 @@ public class ProtegerPanel extends Panel {
         if (selected){
             hm.setBlockSize(Integer.parseInt(blockSizeComboBox.getItemAt(blockSizeComboBox.getSelectedIndex())));
             try {
-                hm.RHIEaS(path,1);
+                hm.RHIEaS(path,20);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -195,24 +195,15 @@ public class Frame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run()   {
-               Frame f1 =Frame.getInstance();
-               f1.setVisible(true);
+            public void run() {
+                Frame f1 = Frame.getInstance();
+                f1.setVisible(true);
                 HammingProcessor hm = new HammingProcessor();
-                hm.setBlockSize(4096);
-                try {
-                    hm.RHaS("fran.txt");
-                    hm.RHIEaS("fran.txt",1);
-                    hm.RCDaS("fran.hax");
-                    hm.RDaS("fran.hax");
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
 
             }
+
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CardL1;
     private javax.swing.JPanel CardL2;
