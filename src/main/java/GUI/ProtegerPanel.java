@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package GUI;
-
 import Hamming.HammingProcessor;
 
 import java.io.*;
@@ -53,6 +52,9 @@ public class ProtegerPanel extends Panel {
         blockSizeComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         textoArchivoTextArea = new javax.swing.JTextArea();
+        proteger2ErroresButton = new javax.swing.JButton();
+        probabilidadTextField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         protegerLabel.setText("Proteger");
 
@@ -97,6 +99,15 @@ public class ProtegerPanel extends Panel {
         textoArchivoTextArea.setRows(5);
         jScrollPane1.setViewportView(textoArchivoTextArea);
 
+        proteger2ErroresButton.setText("Proteger c/2errores");
+        proteger2ErroresButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                proteger2ErroresButtonMousePressed(evt);
+            }
+        });
+
+        jLabel3.setText("Probabilidad:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,12 +128,19 @@ public class ProtegerPanel extends Panel {
                                 .addComponent(jLabel1)
                                 .addGap(35, 35, 35)
                                 .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
-                                .addComponent(protegerErrorButton)
-                                .addGap(152, 152, 152)
-                                .addComponent(protegerButton))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(proteger2ErroresButton)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(protegerErrorButton)
+                                        .addGap(152, 152, 152)
+                                        .addComponent(protegerButton))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(probabilidadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(297, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,7 +161,13 @@ public class ProtegerPanel extends Panel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(protegerErrorButton)
                     .addComponent(protegerButton))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(proteger2ErroresButton)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(probabilidadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,15 +176,20 @@ public class ProtegerPanel extends Panel {
 
     private void protegerErrorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_protegerErrorButtonMousePressed
         if (selected){
+            int aux =0;
             hm.setBlockSize(Integer.parseInt(blockSizeComboBox.getItemAt(blockSizeComboBox.getSelectedIndex())));
             try {
+                try{
+                     aux = Integer.parseInt(probabilidadTextField.getText());
+                }
+                catch (NumberFormatException nme){
+                    //TODO agregar el joptionPane(robarlo de IDS2)
+                }
                 hm.RHIEaS(path,20);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
-
-
     }//GEN-LAST:event_protegerErrorButtonMousePressed
 
     private void protegerButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_protegerButtonMousePressed
@@ -209,13 +238,35 @@ public class ProtegerPanel extends Panel {
     private void blockSizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockSizeComboBoxActionPerformed
     }//GEN-LAST:event_blockSizeComboBoxActionPerformed
 
+    private void proteger2ErroresButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_proteger2ErroresButtonMousePressed
+            if (selected){
+                int aux=1;
+                hm.setBlockSize(Integer.parseInt(blockSizeComboBox.getItemAt(blockSizeComboBox.getSelectedIndex())));
+                try {
+                    try{
+                        aux = Integer.parseInt(probabilidadTextField.getText());
+                    }
+                    catch(NumberFormatException nme){
+                        //TODO agregar el joptionpane(robarlo de IDS2)
+                    }
+                    hm.RHI2EaS(path,aux);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+        }
+       
+    }//GEN-LAST:event_proteger2ErroresButtonMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirAButton;
     private javax.swing.JComboBox<String> blockSizeComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField probabilidadTextField;
+    private javax.swing.JButton proteger2ErroresButton;
     private javax.swing.JButton protegerButton;
     private javax.swing.JButton protegerErrorButton;
     private javax.swing.JLabel protegerLabel;
