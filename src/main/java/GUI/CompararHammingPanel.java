@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author franc

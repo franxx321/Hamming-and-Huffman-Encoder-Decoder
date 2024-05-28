@@ -11,13 +11,15 @@ public class PanelGUIHandler extends GUIHandler {
 
     private static PanelGUIHandler instance;
 
-    public static String PanelCompactar ="Panel Compactar",panelProteger = "Panel proteger", panelDesproteger = "Panel desproteger";
+    public static String PanelCompactar ="Panel Compactar",panelProteger = "Panel proteger", panelDesproteger = "Panel desproteger", PanelEstadisticas = "Panel Estadisticas";
 
     private PanelGUIHandler(){
         panels = new HashMap<>();
         panels.put(PanelGUIHandler.PanelCompactar,new CompactarPanel());
+        panels.put(PanelGUIHandler.PanelEstadisticas,new EstadisticasPanel());
         panels.put(PanelGUIHandler.panelProteger, new ProtegerPanel());
         panels.put(PanelGUIHandler.panelDesproteger,new DesprotegerPanel());
+       
     }
 
     public static PanelGUIHandler getInstance(){
