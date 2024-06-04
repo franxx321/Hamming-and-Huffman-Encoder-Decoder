@@ -139,7 +139,7 @@ public class Huffman {
                 bytes[i] = bout.get(i);
             }
 
-            FileOutputStream fos = new FileOutputStream(new File(nombreArchivo + "Compactado.txt"));
+            FileOutputStream fos = new FileOutputStream(new File(nombreArchivo + ".huf"));
             fos.write(bytes);
 
             String mapa = "" + size + "\n";
@@ -158,7 +158,7 @@ public class Huffman {
         }
     }
 
-    public void descomprimir(String pathFileCom, String pathTable) {
+    public void descomprimir(String pathFileCom, String pathTable, String nombreArchivo) {
         List<Byte> bin = new ArrayList<>();
         List<Byte> bout = new ArrayList<>();
         Map<String, Byte> cod = new HashMap<>();
@@ -222,7 +222,7 @@ public class Huffman {
                 bytes[i] = bout.get(i);
             }
 
-            FileOutputStream fos = new FileOutputStream(new File("pruebaDecod.txt"));
+            FileOutputStream fos = new FileOutputStream(new File( nombreArchivo + ".dhu"));
             fos.write(bytes);
 
         } catch (FileNotFoundException e) {

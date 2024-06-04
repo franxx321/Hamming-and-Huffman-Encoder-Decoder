@@ -227,9 +227,22 @@ public class HammingProcessor {
         }
      return bout;
     }
-
-    //CODESC introduce errores a un archivo humminizado
+    
+   //CODESC introduce un error por paquete a un arreglo humminizado 
     private byte[] introduceErrors(byte[] bin,int probability){
+        Random rand = new Random(System.currentTimeMillis());
+        nHB= bin.length/nBytes;
+        for(int i=0; i<nHB;i++){
+            if((int)(rand.nextDouble()*probability)==0){
+                int r = (int)((rand.nextDouble())*nBits);
+                bin[(i* nBytes)+(r/8)] = (byte)(bin[(i* nBytes)+(r/8)] ^ (0x1<<(r%8)));
+            }
+        }
+        return bin;
+    }
+
+    //CODESC introduce dos errores a un arreglo humminizado
+    private byte[] introduceTwoErrors(byte[] bin,int probability){
         Random rand = new Random(System.currentTimeMillis());
         nHB= bin.length/nBytes;
         for(int i=0; i<nHB;i++){
@@ -306,6 +319,26 @@ public class HammingProcessor {
 
         byte[] bin = this.inRead(pathname);
         byte[] bout = this.hamminize(bin);
+        bout =this.introduceErrors( bout,probability);
+        this.inWrite(bout, pathname.substring(0,pathname.lastIndexOf('.'))+fileType);
+    }
+    
+    //CODESC Read humminize introduce 2 errors and save
+    public void RHI2EaS(String pathname,int probability) throws IOException, FileNotFoundException {
+        String fileType;
+        if(nBits == 8){
+            fileType=".he1";
+        } else if (nBits==4096) {
+            fileType=".he2";
+        } else if (nBits==65536) {
+            fileType=".he3";
+        }
+        else {
+            fileType =(".he"+nBits);
+        }
+
+        byte[] bin = this.inRead(pathname);
+        byte[] bout = this.humminize(bin);
         bout =this.introduceErrors( bout,probability);
         this.inWrite(bout, pathname.substring(0,pathname.lastIndexOf('.'))+fileType);
     }

@@ -60,6 +60,11 @@ public class HuffmanSecundario extends Panel {
                 EstadisticasButtonMousePressed(evt);
             }
         });
+        EstadisticasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EstadisticasButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -104,6 +109,11 @@ public class HuffmanSecundario extends Panel {
     private void EstadisticasButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadisticasButtonMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_EstadisticasButtonMousePressed
+
+    private void EstadisticasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstadisticasButtonActionPerformed
+        // TODO add your handling code here:
+        PanelGUIHandler.getInstance().changePanel(PanelGUIHandler.PanelEstadisticas);
+    }//GEN-LAST:event_EstadisticasButtonActionPerformed
 
     @Override
     public void init() {
