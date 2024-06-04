@@ -11,14 +11,7 @@ public class HammingProcessor {
 
 
 
-    //CODESC Esta funcion genera un logaritmo "con techo" en base 2
-    private static int rLog2(int n){
-        int r = 31 - Integer.numberOfLeadingZeros(n);
-        if (n> Math.pow(2,r)){
-            r++;
-        }
-        return r;
-    }
+
 
     public HammingProcessor(){
     }
@@ -27,12 +20,22 @@ public class HammingProcessor {
     private  int nBits;
     private int nBytes;
     private int cBits;
+    private float cBytes;
     private int nHB;
     private final int sbits =32;
     private final int sbytes =sbits/8;
 
-    //VDESC numero de bytes de control, puede ser una fraccion, por lo que es un float
-    private float cBytes;
+
+
+
+    //CODESC Esta funcion genera un logaritmo "con techo" en base 2
+    private static int iLog2(int n){
+        int r = 31 - Integer.numberOfLeadingZeros(n);
+        if (n> Math.pow(2,r)){
+            r++;
+        }
+        return r;
+    }
 
     //CODESC setea el tamaño del bloque de hamming
     public void setBlockSize(int nBits){
@@ -43,7 +46,7 @@ public class HammingProcessor {
     //CODESC setea los valores internos a su valor necesario
     private void setInternalValues(){
         this.nBytes=this.nBits/8;
-        this.cBits= HammingProcessor.rLog2(this.nBits);
+        this.cBits= HammingProcessor.iLog2(this.nBits);
         this.cBytes=((float)cBits)/8;
     }
 
@@ -97,18 +100,18 @@ public class HammingProcessor {
     }
 
     //CODESC humminiza el archivo
-    private byte[] humminize(byte[] bin){
+    private byte[] hamminize(byte[] bin){
         float aux2 = cBytes+(1f/8f);
         int nHB = (int)Math.ceil(bin.length/(nBytes - aux2));
         byte [] binter = new byte[nHB* nBytes];
-        int cin =0;
+        long cin =0;
         for (int k=0; k<nHB;k++){
             int m=k* nBytes;
             for (int i = 1; i< cBits; i++){
                 try{
                     int h= (int)(Math.pow(2,i+1)-2);
                     for (int j = (int)Math.pow(2,i);j<=h;j++ ){
-                        binter[m+(j/8)]=(byte) (binter[m+(j/8)]| ((bin[cin/8]&0x1<<(cin%8))>>cin%8)<<j%8);
+                        binter[m+(j/8)]=(byte) (binter[m+(j/8)]| ((bin[(int)(cin/8)]&0x1<<(cin%8))>>cin%8)<<j%8);
                         cin++;
                     }
                 }
@@ -141,7 +144,7 @@ public class HammingProcessor {
     }
 
     //CODESC deshumminiza el archivo(no corrige los errores)
-    private byte[] deHumminize(byte[] bin, StringBuilder extensionBuilder){
+    private byte[] deHamminize(byte[] bin, StringBuilder extensionBuilder){
         extensionBuilder.delete(0,extensionBuilder.length());
         nHB = bin.length/nBytes;
         byte[] auxArr = new byte[sbytes+1];
@@ -243,6 +246,7 @@ public class HammingProcessor {
         }
         return bin;
     }
+
     //CODESC corrige los errores de un archivo humminizado
     private byte[] correctErrors(byte[] bin) {
         nHB= bin.length/nBytes;
@@ -254,7 +258,7 @@ public class HammingProcessor {
                 aux2+=(((bin[(i* nBytes)+(j/8)])>>>j%8)&0x1);
             }
             if(aux>0){
-                if (aux2%2==0){
+                if (aux2%2==1){
                     aux--;
                     bin[(i* nBytes) + (aux/8)]= (byte)(bin[(i* nBytes) + aux/8] ^ (0x1)<<aux%8);
                 }
@@ -266,12 +270,11 @@ public class HammingProcessor {
             return bin;
     }
 
-
     //CODESC Read Humminize and Save: lee, humminiza y guarda un archivo
     public void RHaS(String pathname) throws IOException,FileNotFoundException {
 
         byte[] bin = this.inRead(pathname);
-        byte[] bout = this.humminize(bin);
+        byte[] bout = this.hamminize(bin);
         String fileType;
         if(nBits == 8){
             fileType=".ha1";
@@ -302,7 +305,7 @@ public class HammingProcessor {
         }
 
         byte[] bin = this.inRead(pathname);
-        byte[] bout = this.humminize(bin);
+        byte[] bout = this.hamminize(bin);
         bout =this.introduceErrors( bout,probability);
         this.inWrite(bout, pathname.substring(0,pathname.lastIndexOf('.'))+fileType);
     }
@@ -312,7 +315,7 @@ public class HammingProcessor {
         byte[] bin = this.outRead(pathname);
         bin = this.correctErrors(bin);
         StringBuilder extensionBuilder = new StringBuilder();
-        byte[] bout = this.deHumminize(bin,extensionBuilder);
+        byte[] bout = this.deHamminize(bin,extensionBuilder);
         this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"SE"+"."+extensionBuilder);
     }
 
@@ -320,7 +323,7 @@ public class HammingProcessor {
     public void RDaS (String pathname) throws IOException,FileNotFoundException {
         byte[] bin = this.outRead(pathname);
         StringBuilder extensionBuilder = new StringBuilder();
-        byte[] bout = this.deHumminize(bin,extensionBuilder);
+        byte[] bout = this.deHamminize(bin,extensionBuilder);
         this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"CE"+"."+extensionBuilder);
     }
 }
