@@ -11,7 +11,7 @@ public class PanelGUIHandler extends GUIHandler {
 
     private static PanelGUIHandler instance;
 
-    public static String PanelCompactar ="Panel Compactar",panelProteger = "Panel proteger", panelDesproteger = "Panel desproteger", PanelEstadisticas = "Panel Estadisticas";
+    public static String PanelCompactar ="Panel Compactar",panelProteger = "Panel proteger", panelDesproteger = "Panel desproteger", PanelEstadisticas = "Panel Estadisticas", PanelDescompactar = "Panel descompactar";
 
     private PanelGUIHandler(){
         panels = new HashMap<>();
@@ -19,6 +19,7 @@ public class PanelGUIHandler extends GUIHandler {
         panels.put(PanelGUIHandler.PanelEstadisticas,new EstadisticasPanel());
         panels.put(PanelGUIHandler.panelProteger, new ProtegerPanel());
         panels.put(PanelGUIHandler.panelDesproteger,new DesprotegerPanel());
+        panels.put(PanelGUIHandler.PanelDescompactar, new DescompactarPanel());
        
     }
 
