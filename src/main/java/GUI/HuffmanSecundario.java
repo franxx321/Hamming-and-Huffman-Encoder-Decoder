@@ -46,6 +46,11 @@ public class HuffmanSecundario extends Panel {
                 DescompactarButtonMousePressed(evt);
             }
         });
+        DescompactarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DescompactarButtonActionPerformed(evt);
+            }
+        });
 
         CompararButton.setText("Comparar");
         CompararButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -114,6 +119,11 @@ public class HuffmanSecundario extends Panel {
         // TODO add your handling code here:
         PanelGUIHandler.getInstance().changePanel(PanelGUIHandler.PanelEstadisticas);
     }//GEN-LAST:event_EstadisticasButtonActionPerformed
+
+    private void DescompactarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DescompactarButtonActionPerformed
+        // TODO add your handling code here:
+        PanelGUIHandler.getInstance().changePanel(PanelGUIHandler.PanelDescompactar);
+    }//GEN-LAST:event_DescompactarButtonActionPerformed
 
     @Override
     public void init() {
