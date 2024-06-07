@@ -7,16 +7,15 @@ public class Huffman {
 
     //CODESC Funcion que imprime cada codigo asignado
     private void printCode(HuffmanNode root, String s, Map<Byte, String> cod) {
-        if (root.left == null && root.right == null
-                && root.b != 0) {
+        if (root.getLeft() == null && root.getRight() == null
+                && root.getB() != 0) {
 
-            System.out.println(root.b + ":" + s);
-            cod.put(root.b, s);
+            cod.put(root.getB(), s);
             return;
         }
 
-        printCode(root.left, s + "1", cod);
-        printCode(root.right, s + "0", cod);
+        printCode(root.getLeft(), s + "1", cod);
+        printCode(root.getRight(), s + "0", cod);
     }
 
     public void comprimir(String pathname, String nombreArchivo) {
@@ -37,7 +36,8 @@ public class Huffman {
 
             int tam = bin.size();
 
-            //CODESC Calculo frecuencias y las almaceno en un mapa (clave: simbolo, elemento: freq)
+            //CODESC Calculo frecuencias y las almaceno en un
+            // mapa (clave: simbolo, elemento: freq)
             for (int i = 0; i < tam; i++) {
                 if (freq.containsKey(bin.get(i))) {
                     freq.put(bin.get(i), freq.get(bin.get(i)) + 1);
@@ -58,16 +58,15 @@ public class Huffman {
             for (Map.Entry<Byte, Integer> entry : freq.entrySet()) {
                 HuffmanNode hn = new HuffmanNode();
 
-                hn.b = entry.getKey();
-                hn.freq = entry.getValue();
+                hn.setB(entry.getKey());
+                hn.setFreq(entry.getValue());
 
-                hn.left = null;
-                hn.right = null;
+                hn.setLeft(null);
+                hn.setRight(null);
 
                 q.add(hn);
             }
 
-            //CODESC Creamos un nodo raiz
             HuffmanNode root = null;
 
             //CODESC Comenzamos con el algoritmo: tomando los dos valores mas chicos y asignando hijos hasta que el tamanio sea 1
@@ -80,12 +79,12 @@ public class Huffman {
 
                 HuffmanNode f = new HuffmanNode();
 
-                f.freq = x.freq + y.freq;
-                f.b = Byte.parseByte("0", 10);
+                f.setFreq(x.getFreq() + y.getFreq());
+                f.setB(Byte.parseByte("0", 10));
 
-                f.left = x;
+                f.setLeft(x);
 
-                f.right = y;
+                f.setRight(y);
 
                 root = f;
 
@@ -148,7 +147,7 @@ public class Huffman {
                 mapa += (entry.getValue() + "\n" + entry.getKey() + "\n");
             }
 
-            FileOutputStream fos2 = new FileOutputStream(new File(nombreArchivo+ "Tabla.txt"));
+            FileOutputStream fos2 = new FileOutputStream(new File(nombreArchivo + "Tabla.txt"));
             fos2.write(mapa.getBytes());
 
         } catch (FileNotFoundException e) {
@@ -222,7 +221,7 @@ public class Huffman {
                 bytes[i] = bout.get(i);
             }
 
-            FileOutputStream fos = new FileOutputStream(new File( nombreArchivo + ".dhu"));
+            FileOutputStream fos = new FileOutputStream(new File(nombreArchivo + ".dhu"));
             fos.write(bytes);
 
         } catch (FileNotFoundException e) {
