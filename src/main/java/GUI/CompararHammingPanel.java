@@ -4,13 +4,63 @@
  */
 package GUI;
 
+import Hamming.HammingProcessor;
+
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
+import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author franc
  */
-public class CompararHammingPanel extends javax.swing.JPanel {
+public class CompararHammingPanel extends Panel{
+
+    private String path,name,path2,name2,text1,text2;
+    private boolean selected,selected2;
+    File file,file2;
+    private HammingProcessor hm;
+    /**
+     * Creates new form ProtegerPanel
+     */
+
+    @Override
+    public void init() {
+        textoArchivoTextArea.setText("");
+        selected=false;
+        selected2=false;
+    }
+
+    private boolean validExtension(String extension) {
+        boolean result = false;
+        Pattern pattern = Pattern.compile("^h([ae])[0-9]$");
+        Matcher matcher = pattern.matcher(extension);
+        if (matcher.matches()) {
+            result = true;
+        }
+        return result;
+    }
+
+    private boolean validFiles(String filename, String filename2){
+        boolean result = false;
+        String aux = filename.substring(filename.lastIndexOf('.')-2,filename.lastIndexOf('.'));
+        String aux2 = filename2.substring(filename2.lastIndexOf('.')-2,filename2.lastIndexOf('.'));
+        if (filename.substring(0,filename.lastIndexOf('.')).equals(filename2.substring(0,filename2.lastIndexOf('.')))){
+            if(validExtension(filename.substring(filename.lastIndexOf('.'))) || validExtension(filename2.substring(filename2.lastIndexOf('.')))){
+                result = true;
+            }
+            Pattern pattern1 = Pattern.compile("^[SC]E$");
+            Matcher matcher1 = pattern1.matcher(aux);
+            Matcher matcher2 = pattern1.matcher(aux2);
+            if (matcher1.matches() && matcher2.matches()) {
+                result = true;
+            }
+        }
+
+        return result;
+    }
 
     /**
      * Creates new form CompararHammingPanel
@@ -131,20 +181,23 @@ public class CompararHammingPanel extends javax.swing.JPanel {
             name = j.getSelectedFile().getName();
             name = name.substring(0, name.lastIndexOf('.'));
             try {
-                String s = "", cadena = "";
+                String  cadena = "";
                 FileReader f = new FileReader(path);
                 BufferedReader b = new BufferedReader(f);
 
                 while ((cadena = b.readLine()) != null) {
-                    s += cadena + "\n";
+                    text1 += cadena + "\n";
                 }
                 b.close();
                 f.close();
-                textoArchivoTextArea.setText(s);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+                textoArchivoTextArea2.setText(text1);
+                if(selected2){
+
+                }
+            }  catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
         else {
@@ -153,11 +206,43 @@ public class CompararHammingPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_abrirAButtonMousePressed
 
     private void abrirAButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirAButtonActionPerformed
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        int r = j.showSaveDialog(null);
 
+        if (r == JFileChooser.APPROVE_OPTION) {
+            selected2 =true;
+            path2 = j.getSelectedFile().getAbsolutePath();
+            file2= new File(path);
+            name2 = j.getSelectedFile().getName();
+            name2= name2.substring(0, name2.lastIndexOf('.'));
+            try {
+                String  cadena = "";
+                FileReader f = new FileReader(path);
+                BufferedReader b = new BufferedReader(f);
+
+                while ((cadena = b.readLine()) != null) {
+                    text2 += cadena + "\n";
+                }
+                b.close();
+                f.close();
+                textoArchivoTextArea.setText(text2);
+
+                if (selected){
+
+                }
+            }  catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else {
+            selected =false;
+        }
     }//GEN-LAST:event_abrirAButtonActionPerformed
 
     private void abrirAButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButton2MousePressed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_abrirAButton2MousePressed
 
     private void abrirAButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirAButton2ActionPerformed

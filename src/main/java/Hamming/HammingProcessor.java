@@ -338,7 +338,7 @@ public class HammingProcessor {
         }
 
         byte[] bin = this.inRead(pathname);
-        byte[] bout = this.humminize(bin);
+        byte[] bout = this.hamminize(bin);
         bout =this.introduceErrors( bout,probability);
         this.inWrite(bout, pathname.substring(0,pathname.lastIndexOf('.'))+fileType);
     }
