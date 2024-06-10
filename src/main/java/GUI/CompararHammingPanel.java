@@ -90,7 +90,7 @@ public class CompararHammingPanel extends Panel{
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textoArchivoTextPane2 = new javax.swing.JTextPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
         textoArchivoTextPane1 = new javax.swing.JTextPane();
 
         jLabel2.setText("Seleccionar archivo: ");
@@ -125,7 +125,7 @@ public class CompararHammingPanel extends Panel{
 
         jScrollPane1.setViewportView(textoArchivoTextPane2);
 
-        jScrollPane2.setViewportView(textoArchivoTextPane1);
+        jScrollPane3.setViewportView(textoArchivoTextPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,9 +137,12 @@ public class CompararHammingPanel extends Panel{
                 .addGap(472, 472, 472))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(81, 81, 81)
-                .addComponent(jLabel2)
-                .addGap(76, 76, 76)
-                .addComponent(abrirAButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(76, 76, 76)
+                        .addComponent(abrirAButton))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,11 +151,6 @@ public class CompararHammingPanel extends Panel{
                         .addGap(76, 76, 76)
                         .addComponent(abrirAButton2)))
                 .addGap(68, 68, 68))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(91, 91, 91)
-                    .addComponent(jScrollPane2)
-                    .addGap(586, 586, 586)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,13 +166,10 @@ public class CompararHammingPanel extends Panel{
                         .addComponent(jLabel2)
                         .addComponent(abrirAButton)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(135, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(36, 36, 36)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -278,7 +273,7 @@ public class CompararHammingPanel extends Panel{
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextPane textoArchivoTextPane1;
     private javax.swing.JTextPane textoArchivoTextPane2;
     // End of variables declaration//GEN-END:variables
