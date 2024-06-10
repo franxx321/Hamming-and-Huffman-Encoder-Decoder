@@ -176,7 +176,7 @@ public class ProtegerPanel extends Panel {
 
     private void protegerErrorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_protegerErrorButtonMousePressed
         if (selected){
-            int aux =0;
+            int aux =1;
             hm.setBlockSize(Integer.parseInt(blockSizeComboBox.getItemAt(blockSizeComboBox.getSelectedIndex())));
             try {
                 try{
@@ -185,7 +185,7 @@ public class ProtegerPanel extends Panel {
                 catch (NumberFormatException nme){
                     //TODO agregar el joptionPane(robarlo de IDS2)
                 }
-                hm.RHIEaS(path,20);
+                hm.RHIEaS(path,aux);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

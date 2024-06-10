@@ -8,6 +8,11 @@ import Hamming.HammingProcessor;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
+import javax.swing.text.Highlighter;
+import java.awt.*;
 import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,7 +33,7 @@ public class CompararHammingPanel extends Panel{
 
     @Override
     public void init() {
-        textoArchivoTextArea.setText("");
+        textoArchivoTextPane1.setText("");
         selected=false;
         selected2=false;
     }
@@ -80,11 +85,13 @@ public class CompararHammingPanel extends Panel{
 
         jLabel2 = new javax.swing.JLabel();
         abrirAButton = new javax.swing.JButton();
-        textoArchivoTextArea = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         abrirAButton2 = new javax.swing.JButton();
-        textoArchivoTextArea2 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textoArchivoTextPane2 = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textoArchivoTextPane1 = new javax.swing.JTextPane();
 
         jLabel2.setText("Seleccionar archivo: ");
 
@@ -100,9 +107,6 @@ public class CompararHammingPanel extends Panel{
             }
         });
 
-        textoArchivoTextArea.setColumns(20);
-        textoArchivoTextArea.setRows(5);
-
         jLabel3.setText("Seleccionar archivo: ");
 
         abrirAButton2.setText("Abrir Archivo");
@@ -117,35 +121,38 @@ public class CompararHammingPanel extends Panel{
             }
         });
 
-        textoArchivoTextArea2.setColumns(20);
-        textoArchivoTextArea2.setRows(5);
-
         jLabel1.setText("Comparar");
+
+        jScrollPane1.setViewportView(textoArchivoTextPane2);
+
+        jScrollPane2.setViewportView(textoArchivoTextPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(abrirAButton))
-                    .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(abrirAButton2))
-                    .addComponent(textoArchivoTextArea2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(472, 472, 472))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(jLabel2)
+                .addGap(76, 76, 76)
+                .addComponent(abrirAButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(76, 76, 76)
+                        .addComponent(abrirAButton2)))
+                .addGap(68, 68, 68))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(91, 91, 91)
+                    .addComponent(jScrollPane2)
+                    .addGap(586, 586, 586)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,19 +161,20 @@ public class CompararHammingPanel extends Panel{
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(abrirAButton2))
-                        .addGap(22, 22, 22)
-                        .addComponent(textoArchivoTextArea2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(abrirAButton))
-                        .addGap(22, 22, 22)
-                        .addComponent(textoArchivoTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(abrirAButton2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(abrirAButton)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(135, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(36, 36, 36)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -175,13 +183,13 @@ public class CompararHammingPanel extends Panel{
         int r = j.showSaveDialog(null);
 
         if (r == JFileChooser.APPROVE_OPTION) {
-            selected =true;
             path = j.getSelectedFile().getAbsolutePath();
             file= new File(path);
             name = j.getSelectedFile().getName();
             name = name.substring(0, name.lastIndexOf('.'));
             try {
                 String  cadena = "";
+                text1="";
                 FileReader f = new FileReader(path);
                 BufferedReader b = new BufferedReader(f);
 
@@ -190,13 +198,25 @@ public class CompararHammingPanel extends Panel{
                 }
                 b.close();
                 f.close();
-                textoArchivoTextArea2.setText(text1);
+                textoArchivoTextPane1.setText(text1);
+                selected =true;
                 if(selected2){
+                    Highlighter.HighlightPainter hp = new DefaultHighlightPainter(Color.red);
+                    char[] auxtext1 = text1.toCharArray();
+                    char[] auxtext2 = text2.toCharArray();
+                    for (int i =0 ; i< auxtext1.length;i++){
+                        if(auxtext1[i]!= auxtext2[i]){
+                            textoArchivoTextPane2.getHighlighter().addHighlight(i,i+1,hp);
+                        }
+                        System.out.println(i);
+                    }
 
                 }
             }  catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (BadLocationException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -206,18 +226,23 @@ public class CompararHammingPanel extends Panel{
     }//GEN-LAST:event_abrirAButtonMousePressed
 
     private void abrirAButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirAButtonActionPerformed
+
+    }//GEN-LAST:event_abrirAButtonActionPerformed
+
+    private void abrirAButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButton2MousePressed
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         int r = j.showSaveDialog(null);
 
         if (r == JFileChooser.APPROVE_OPTION) {
             selected2 =true;
             path2 = j.getSelectedFile().getAbsolutePath();
-            file2= new File(path);
+            file2= new File(path2);
             name2 = j.getSelectedFile().getName();
             name2= name2.substring(0, name2.lastIndexOf('.'));
             try {
                 String  cadena = "";
-                FileReader f = new FileReader(path);
+                text2="";
+                FileReader f = new FileReader(path2);
                 BufferedReader b = new BufferedReader(f);
 
                 while ((cadena = b.readLine()) != null) {
@@ -225,7 +250,7 @@ public class CompararHammingPanel extends Panel{
                 }
                 b.close();
                 f.close();
-                textoArchivoTextArea.setText(text2);
+                textoArchivoTextPane2.setText(text2);
 
                 if (selected){
 
@@ -237,12 +262,8 @@ public class CompararHammingPanel extends Panel{
             }
         }
         else {
-            selected =false;
+            selected2 = false;
         }
-    }//GEN-LAST:event_abrirAButtonActionPerformed
-
-    private void abrirAButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButton2MousePressed
-
     }//GEN-LAST:event_abrirAButton2MousePressed
 
     private void abrirAButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirAButton2ActionPerformed
@@ -256,7 +277,9 @@ public class CompararHammingPanel extends Panel{
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextArea textoArchivoTextArea;
-    private javax.swing.JTextArea textoArchivoTextArea2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextPane textoArchivoTextPane1;
+    private javax.swing.JTextPane textoArchivoTextPane2;
     // End of variables declaration//GEN-END:variables
 }

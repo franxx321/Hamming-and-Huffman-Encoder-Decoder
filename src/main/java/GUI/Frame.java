@@ -199,6 +199,13 @@ public class Frame extends javax.swing.JFrame {
                 Frame f1 = Frame.getInstance();
                 f1.setVisible(true);
                 HammingProcessor hm = new HammingProcessor();
+                hm.setBlockSize(4096);
+                try {
+                    hm.RHIEaS("fran.txt",1);
+                    hm.RHaS("fran.txt");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
 
             }
 

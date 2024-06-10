@@ -136,9 +136,10 @@ public class HammingProcessor {
                 int m = (aux>>>k)&0x1;
                 int n = m<<(z%8);
                 binter[l]=  (byte)(binter[l] | n);
+                aux3+= ((binter[l]>>>z%8)&0x1);
             }
             aux3=aux3%2;
-            binter[(i*nBytes)+((nBits-1)/8)] = (byte)(binter[(i*nBytes)+((nBits-1)/8)] ^ aux3<<((nBits-1)%8));
+            binter[((i*nBytes)+((nBits-1)/8))] = (byte)(binter[(i*nBytes)+((nBits-1)/8)] ^ (aux3<<((nBits-1)%8)));
         }
         return binter;
     }
@@ -267,9 +268,10 @@ public class HammingProcessor {
             int aux2 =0;
             int aux=0;
             for (int j = 0;j< nBits-1;j++){
-                aux = aux^ (((bin[(i* nBytes)+(j/8)])>>>j%8)&0x1)*(j+1);
+                aux = aux^ ((((bin[(i* nBytes)+(j/8)])>>>j%8)&0x1)*(j+1));
                 aux2+=(((bin[(i* nBytes)+(j/8)])>>>j%8)&0x1);
             }
+            aux2+=(((bin[(i* nBytes)+((nBits-1)/8)])>>>(nBits-1)%8)&0x1);
             if(aux>0){
                 if (aux2%2==1){
                     aux--;
@@ -339,7 +341,7 @@ public class HammingProcessor {
 
         byte[] bin = this.inRead(pathname);
         byte[] bout = this.hamminize(bin);
-        bout =this.introduceErrors( bout,probability);
+        bout =this.introduceTwoErrors( bout,probability);
         this.inWrite(bout, pathname.substring(0,pathname.lastIndexOf('.'))+fileType);
     }
 

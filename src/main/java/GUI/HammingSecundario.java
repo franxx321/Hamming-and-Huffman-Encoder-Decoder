@@ -92,6 +92,7 @@ public class HammingSecundario extends Panel {
 
     private void compararButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_compararButtonMousePressed
         // TODO add your handling code here:
+        PanelGUIHandler.getInstance().changePanel(PanelGUIHandler.panelComparar);
     }//GEN-LAST:event_compararButtonMousePressed
 
     
