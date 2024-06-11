@@ -36,6 +36,8 @@ public class HammingSecundario extends Panel {
         desprotegerButton = new javax.swing.JButton();
         compararButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(78, 217, 255));
+
         protegerButton.setText("Proteger");
         protegerButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -62,23 +64,23 @@ public class HammingSecundario extends Panel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
+                .addContainerGap(166, Short.MAX_VALUE)
                 .addComponent(protegerButton)
-                .addGap(159, 159, 159)
+                .addGap(100, 100, 100)
                 .addComponent(desprotegerButton)
-                .addGap(133, 133, 133)
+                .addGap(100, 100, 100)
                 .addComponent(compararButton)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(protegerButton)
-                    .addComponent(desprotegerButton)
-                    .addComponent(compararButton))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(protegerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                    .addComponent(desprotegerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(compararButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

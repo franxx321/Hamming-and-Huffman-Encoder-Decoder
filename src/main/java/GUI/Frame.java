@@ -53,6 +53,8 @@ public class Frame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        MenuPrincipal.setBackground(new java.awt.Color(48, 101, 255));
+
         HammingButton.setText("Hamming");
         HammingButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -60,10 +62,15 @@ public class Frame extends javax.swing.JFrame {
             }
         });
 
-        HuffmannButton.setText("Huffmann");
+        HuffmannButton.setText("Huffman");
         HuffmannButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 HuffmannButtonMousePressed(evt);
+            }
+        });
+        HuffmannButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HuffmannButtonActionPerformed(evt);
             }
         });
 
@@ -72,29 +79,31 @@ public class Frame extends javax.swing.JFrame {
         MenuPrincipalLayout.setHorizontalGroup(
             MenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuPrincipalLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addGroup(MenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(HammingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(HuffmannButton))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(HammingButton, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                    .addComponent(HuffmannButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         MenuPrincipalLayout.setVerticalGroup(
             MenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuPrincipalLayout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(HammingButton)
-                .addGap(43, 43, 43)
-                .addComponent(HuffmannButton)
+                .addGap(240, 240, 240)
+                .addComponent(HammingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(HuffmannButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         MenuSecundario.setLayout(new java.awt.CardLayout());
 
+        CardL1.setBackground(new java.awt.Color(78, 217, 255));
+
         javax.swing.GroupLayout CardL1Layout = new javax.swing.GroupLayout(CardL1);
         CardL1.setLayout(CardL1Layout);
         CardL1Layout.setHorizontalGroup(
             CardL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 913, Short.MAX_VALUE)
+            .addGap(0, 896, Short.MAX_VALUE)
         );
         CardL1Layout.setVerticalGroup(
             CardL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +133,7 @@ public class Frame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(MenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(MenuSecundario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -148,6 +157,10 @@ public class Frame extends javax.swing.JFrame {
     private void HuffmannButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HuffmannButtonMousePressed
         SMenuGUIHandler.getInstance().changePanel(SMenuGUIHandler.huffmanSecundario);
     }//GEN-LAST:event_HuffmannButtonMousePressed
+
+    private void HuffmannButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HuffmannButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HuffmannButtonActionPerformed
 
     public JPanel getMenuSecundario() {
         return MenuSecundario;

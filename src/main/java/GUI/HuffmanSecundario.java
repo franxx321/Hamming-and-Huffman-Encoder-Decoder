@@ -30,13 +30,19 @@ public class HuffmanSecundario extends Panel {
 
         CompactarButton = new javax.swing.JButton();
         DescompactarButton = new javax.swing.JButton();
-        CompararButton = new javax.swing.JButton();
         EstadisticasButton = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(78, 217, 255));
 
         CompactarButton.setText("Compactar");
         CompactarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CompactarButtonMousePressed(evt);
+            }
+        });
+        CompactarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CompactarButtonActionPerformed(evt);
             }
         });
 
@@ -49,13 +55,6 @@ public class HuffmanSecundario extends Panel {
         DescompactarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DescompactarButtonActionPerformed(evt);
-            }
-        });
-
-        CompararButton.setText("Comparar");
-        CompararButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                CompararButtonMousePressed(evt);
             }
         });
 
@@ -75,27 +74,24 @@ public class HuffmanSecundario extends Panel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(166, Short.MAX_VALUE)
                 .addComponent(CompactarButton)
-                .addGap(107, 107, 107)
+                .addGap(100, 100, 100)
                 .addComponent(DescompactarButton)
-                .addGap(97, 97, 97)
-                .addComponent(CompararButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addGap(100, 100, 100)
                 .addComponent(EstadisticasButton)
-                .addGap(83, 83, 83))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CompactarButton)
-                    .addComponent(DescompactarButton)
-                    .addComponent(CompararButton)
-                    .addComponent(EstadisticasButton))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CompactarButton, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                    .addComponent(DescompactarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EstadisticasButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -106,10 +102,6 @@ public class HuffmanSecundario extends Panel {
     private void DescompactarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DescompactarButtonMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_DescompactarButtonMousePressed
-
-    private void CompararButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CompararButtonMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CompararButtonMousePressed
 
     private void EstadisticasButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadisticasButtonMousePressed
         // TODO add your handling code here:
@@ -125,6 +117,10 @@ public class HuffmanSecundario extends Panel {
         PanelGUIHandler.getInstance().changePanel(PanelGUIHandler.PanelDescompactar);
     }//GEN-LAST:event_DescompactarButtonActionPerformed
 
+    private void CompactarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompactarButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CompactarButtonActionPerformed
+
     @Override
     public void init() {
 
@@ -133,7 +129,6 @@ public class HuffmanSecundario extends Panel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CompactarButton;
-    private javax.swing.JButton CompararButton;
     private javax.swing.JButton DescompactarButton;
     private javax.swing.JButton EstadisticasButton;
     // End of variables declaration//GEN-END:variables

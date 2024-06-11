@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 
 /**
@@ -54,7 +55,7 @@ public class DescompactarPanel extends Panel {
         TextoArchivoTextArea = new javax.swing.JTextArea();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Descompactar");
+        jLabel1.setText("DESCOMPACTAR");
 
         jLabel2.setText("Seleccionar archivo comprimido: ");
 
@@ -113,7 +114,7 @@ public class DescompactarPanel extends Panel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
@@ -129,7 +130,7 @@ public class DescompactarPanel extends Panel {
                 .addComponent(jButton1)
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -163,6 +164,7 @@ public class DescompactarPanel extends Panel {
                 }
                 TextoArchivoTextArea.setText(s);
                 TextoArchivoTextArea.setEnabled(true);
+                 JOptionPane.showMessageDialog(this, "¡Archivo descompactado con exito!", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(DescompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {

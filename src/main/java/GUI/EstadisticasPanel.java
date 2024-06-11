@@ -58,9 +58,11 @@ public class EstadisticasPanel extends Panel {
         PesoOrgLabel = new javax.swing.JLabel();
         PesoComLabel = new javax.swing.JLabel();
         PesoDescLabel = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        PorcenLabel = new javax.swing.JLabel();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Estadisticas");
+        jLabel1.setText("ESTADISTICAS");
 
         jLabel2.setText("Seleccionar archivo original:");
 
@@ -89,11 +91,13 @@ public class EstadisticasPanel extends Panel {
 
         jLabel5.setText("Descompactado");
 
-        jLabel6.setText("Peso Orignal:");
+        jLabel6.setText("Peso Original:");
 
         jLabel7.setText("Peso Compactado:");
 
         jLabel8.setText("Peso Descompactado:");
+
+        jLabel9.setText("Porcentaje de Reducción:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -122,9 +126,15 @@ public class EstadisticasPanel extends Panel {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9))
                                 .addGap(18, 18, 18)
-                                .addComponent(PesoComLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(PorcenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(PesoComLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -138,8 +148,8 @@ public class EstadisticasPanel extends Panel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
@@ -163,7 +173,11 @@ public class EstadisticasPanel extends Panel {
                     .addComponent(PesoOrgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PesoComLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PesoDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 139, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(PorcenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 105, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -192,7 +206,8 @@ public class EstadisticasPanel extends Panel {
 
                 OriginalTextArea.setText(s);
 
-                PesoOrgLabel.setText(fAux.length() + " bytes");
+                long pesoOrg = fAux.length();
+                PesoOrgLabel.setText(fAux.length()+ " bytes");
 
                 s = "";
                 cadena = "";
@@ -208,6 +223,8 @@ public class EstadisticasPanel extends Panel {
 
                 CompactadoTextArea.setText(s);
                 PesoComLabel.setText(fAux.length() + " bytes");
+                
+                PorcenLabel.setText((int)(((float) fAux.length()/(float) pesoOrg)*100) + " %");
 
                 s = "";
                 cadena = "";
@@ -236,6 +253,13 @@ public class EstadisticasPanel extends Panel {
 
     @Override
     public void init() {
+        OriginalTextArea.setText("");
+        CompactadoTextArea.setText("");
+        DescompactadoTextArea.setText("");
+        PesoComLabel.setText("");
+        PesoDescLabel.setText("");
+        PesoOrgLabel.setText("");
+        
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -248,6 +272,7 @@ public class EstadisticasPanel extends Panel {
     private javax.swing.JLabel PesoComLabel;
     private javax.swing.JLabel PesoDescLabel;
     private javax.swing.JLabel PesoOrgLabel;
+    private javax.swing.JLabel PorcenLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -256,6 +281,7 @@ public class EstadisticasPanel extends Panel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

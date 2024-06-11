@@ -56,7 +56,8 @@ public class ProtegerPanel extends Panel {
         probabilidadTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
-        protegerLabel.setText("Proteger");
+        protegerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        protegerLabel.setText("PROTEGER");
 
         jLabel2.setText("Seleccionar archivo: ");
 
@@ -113,42 +114,38 @@ public class ProtegerPanel extends Panel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(424, 424, 424)
-                        .addComponent(protegerLabel))
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(abrirAButton)
+                        .addGap(76, 76, 76)
+                        .addComponent(jLabel1)
+                        .addGap(35, 35, 35)
+                        .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(proteger2ErroresButton)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(protegerErrorButton)
+                                .addGap(152, 152, 152)
+                                .addComponent(protegerButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(abrirAButton)
-                                .addGap(76, 76, 76)
-                                .addComponent(jLabel1)
-                                .addGap(35, 35, 35)
-                                .addComponent(blockSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(proteger2ErroresButton)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(protegerErrorButton)
-                                        .addGap(152, 152, 152)
-                                        .addComponent(protegerButton))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(probabilidadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                .addComponent(probabilidadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(297, Short.MAX_VALUE))
+            .addComponent(protegerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(protegerLabel)
-                .addGap(87, 87, 87)
+                .addContainerGap()
+                .addComponent(protegerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(abrirAButton)
@@ -167,7 +164,7 @@ public class ProtegerPanel extends Panel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(probabilidadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
