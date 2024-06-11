@@ -248,6 +248,7 @@ public class ProtegerPanel extends Panel {
                     }
                     catch(NumberFormatException nme){
                         //TODO agregar el joptionpane(robarlo de IDS2)
+                        System.out.println("error");
                     }
                     hm.RHI2EaS(path,aux);
                 } catch (IOException e) {

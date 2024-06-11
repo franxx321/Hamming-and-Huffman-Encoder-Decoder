@@ -251,8 +251,6 @@ public class HammingProcessor {
                 if((int)(rand.nextDouble()*probability)==0){
                     int r = (int)((rand.nextDouble())*nBits);
                     bin[(i* nBytes)+(r/8)] = (byte)(bin[(i* nBytes)+(r/8)] ^ (0x1<<(r%8)));
-                    r = (int)((rand.nextDouble())*nBits);
-                    bin[(i* nBytes)+(r/8)] = (byte)(bin[(i* nBytes)+(r/8)] ^ (0x1<<(r%8)));
                 }
                 int r = (int)((rand.nextDouble())*nBits);
                 bin[(i* nBytes)+(r/8)] = (byte)(bin[(i* nBytes)+(r/8)] ^ (0x1<<(r%8)));
@@ -283,6 +281,29 @@ public class HammingProcessor {
             }
         }
             return bin;
+    }
+
+    private boolean check2Errors(byte[] bin){
+        boolean result = false;
+        nHB= bin.length/nBytes;
+        for(int i =0 ; i<nHB;i++){
+            int aux2 =0;
+            int aux=0;
+            for (int j = 0;j< nBits-1;j++){
+                aux = aux^ ((((bin[(i* nBytes)+(j/8)])>>>j%8)&0x1)*(j+1));
+                aux2+=(((bin[(i* nBytes)+(j/8)])>>>j%8)&0x1);
+            }
+            aux2+=(((bin[(i* nBytes)+((nBits-1)/8)])>>>(nBits-1)%8)&0x1);
+            if(aux>0){
+                if (aux2%2==1){
+                    result = true;
+                }
+                else{
+                    throw new DoubleErrorException();
+                }
+            }
+        }
+        return result;
     }
 
     //CODESC Read Humminize and Save: lee, humminiza y guarda un archivo
@@ -357,6 +378,7 @@ public class HammingProcessor {
     //CODESC Read Dehuminize and save: idem RCDaS pero sin corregir errores
     public void RDaS (String pathname) throws IOException,FileNotFoundException {
         byte[] bin = this.outRead(pathname);
+        check2Errors(bin);
         StringBuilder extensionBuilder = new StringBuilder();
         byte[] bout = this.deHamminize(bin,extensionBuilder);
         this.outWrite(bout,pathname.substring(0,pathname.indexOf('.'))+"CE"+"."+extensionBuilder);

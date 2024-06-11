@@ -5,13 +5,14 @@
 package GUI;
 
 import Hamming.HammingProcessor;
+import Utils.DoubleErrorException;
 
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 
 /**
@@ -177,6 +178,9 @@ public class DesprotegerPanel extends Panel {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            catch(DoubleErrorException e){
+                JOptionPane.showMessageDialog(this,"Se detectaron dos errores en el archivo, el mismo no puede ser desprotegido","Error",JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_desprotegerErrorButtonMousePressed
 
@@ -187,6 +191,9 @@ public class DesprotegerPanel extends Panel {
                 hm.RCDaS(path);
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            }
+            catch(DoubleErrorException e){
+                JOptionPane.showMessageDialog(this,"Se detectaron dos errores en el archivo, el mismo no puede ser desprotegido","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_desprotegerButtonMousePressed
