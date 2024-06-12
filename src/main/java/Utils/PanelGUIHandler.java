@@ -1,7 +1,6 @@
 package Utils;
 
 import GUI.*;
-
 import javax.swing.*;
 import java.util.HashMap;
 
@@ -11,7 +10,8 @@ public class PanelGUIHandler extends GUIHandler {
 
     private static PanelGUIHandler instance;
 
-    public static String PanelCompactar ="Panel Compactar",panelProteger = "Panel proteger", panelDesproteger = "Panel desproteger", PanelEstadisticas = "Panel Estadisticas", PanelDescompactar = "Panel descompactar", panelComparar = "Panel Comparar";
+    public static String PanelCompactar ="Panel Compactar",panelProteger = "Panel proteger", panelDesproteger = "Panel desproteger", PanelEstadisticas = "Panel Estadisticas", PanelDescompactar = "Panel descompactar", panelComparar = "Panel Comparar"
+            ,hammingEstadisticas= "Hamming Estadisticas";
 
     private PanelGUIHandler(){
         panels = new HashMap<>();
@@ -21,6 +21,7 @@ public class PanelGUIHandler extends GUIHandler {
         panels.put(PanelGUIHandler.panelDesproteger,new DesprotegerPanel());
         panels.put(PanelGUIHandler.PanelDescompactar, new DescompactarPanel());
         panels.put(PanelGUIHandler.panelComparar,new CompararHammingPanel());
+        panels.put(PanelGUIHandler.hammingEstadisticas, new HammingEstadisticasPanel());
        
     }
 

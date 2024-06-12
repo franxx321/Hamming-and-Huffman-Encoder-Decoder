@@ -35,6 +35,7 @@ public class HammingSecundario extends Panel {
         protegerButton = new javax.swing.JButton();
         desprotegerButton = new javax.swing.JButton();
         compararButton = new javax.swing.JButton();
+        estadisticasButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(78, 217, 255));
 
@@ -58,28 +59,48 @@ public class HammingSecundario extends Panel {
                 compararButtonMousePressed(evt);
             }
         });
+        compararButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                compararButtonActionPerformed(evt);
+            }
+        });
+
+        estadisticasButton.setText("Estadisticas");
+        estadisticasButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                estadisticasButtonMousePressed(evt);
+            }
+        });
+        estadisticasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadisticasButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(166, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(protegerButton)
                 .addGap(100, 100, 100)
                 .addComponent(desprotegerButton)
                 .addGap(100, 100, 100)
                 .addComponent(compararButton)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addComponent(estadisticasButton)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(protegerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                    .addComponent(desprotegerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(compararButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(compararButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(estadisticasButton, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                    .addComponent(desprotegerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(protegerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -97,12 +118,25 @@ public class HammingSecundario extends Panel {
         PanelGUIHandler.getInstance().changePanel(PanelGUIHandler.panelComparar);
     }//GEN-LAST:event_compararButtonMousePressed
 
+    private void estadisticasButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadisticasButtonMousePressed
+        PanelGUIHandler.getInstance().changePanel(PanelGUIHandler.hammingEstadisticas);
+    }//GEN-LAST:event_estadisticasButtonMousePressed
+
+    private void estadisticasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_estadisticasButtonActionPerformed
+
+    private void compararButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compararButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_compararButtonActionPerformed
+
     
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton compararButton;
     private javax.swing.JButton desprotegerButton;
+    private javax.swing.JButton estadisticasButton;
     private javax.swing.JButton protegerButton;
     // End of variables declaration//GEN-END:variables
 }
