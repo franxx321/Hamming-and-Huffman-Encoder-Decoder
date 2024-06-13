@@ -148,7 +148,8 @@ public class CompactarPanel extends Panel {
 
     @Override
     public void init() {
-
+        TextoArchivoTextArea.setText("");
+        ArchivoLabel.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

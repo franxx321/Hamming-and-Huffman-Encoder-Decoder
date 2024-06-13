@@ -187,7 +187,9 @@ public class DescompactarPanel extends Panel {
 
     @Override
     public void init() {
-
+        ArchivoLabel.setText("");
+        ArchivoLabel1.setText("");
+        TextoArchivoTextArea.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

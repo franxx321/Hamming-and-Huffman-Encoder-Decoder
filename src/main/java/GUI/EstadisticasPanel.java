@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 
 /**
@@ -242,7 +243,8 @@ public class EstadisticasPanel extends Panel {
                 PesoDescLabel.setText(fAux.length() + " bytes");
 
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "¡El archivo debe haber sido compactado y descompactado antes!", "Error", JOptionPane.INFORMATION_MESSAGE);
+                //Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
