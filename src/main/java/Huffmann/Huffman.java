@@ -7,15 +7,17 @@ public class Huffman {
 
     //CODESC Funcion que imprime cada codigo asignado
     private void printCode(HuffmanNode root, String s, Map<Byte, String> cod) {
-        if (root.getLeft() == null && root.getRight() == null
-                && root.getB() != 0) {
+        if(root!= null){
+            if (root.getLeft() == null && root.getRight() == null
+                && !root.isFlag()) {
 
-            cod.put(root.getB(), s);
-            return;
+                cod.put(root.getB(), s);
+                return;
+            }
+
+            printCode(root.getLeft(), s + "1", cod);
+            printCode(root.getRight(), s + "0", cod);
         }
-
-        printCode(root.getLeft(), s + "1", cod);
-        printCode(root.getRight(), s + "0", cod);
     }
 
     public void comprimir(String pathname, String nombreArchivo) {
@@ -81,6 +83,7 @@ public class Huffman {
 
                 f.setFreq(x.getFreq() + y.getFreq());
                 f.setB(Byte.parseByte("0", 10));
+                f.setFlag(true);
 
                 f.setLeft(x);
 
@@ -90,6 +93,7 @@ public class Huffman {
 
                 q.add(f);
             }
+
 
             System.out.println("INICIO CODIFICACION");
 

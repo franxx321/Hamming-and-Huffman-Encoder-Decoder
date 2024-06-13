@@ -5,6 +5,7 @@ public class HuffmanNode {
     private byte b;
     private HuffmanNode left;
     private HuffmanNode right;
+    private boolean flag = false;
 
     public HuffmanNode getLeft() {
         return left;
@@ -36,6 +37,14 @@ public class HuffmanNode {
 
     public void setFreq(int freq) {
         this.freq = freq;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 
     @Override
