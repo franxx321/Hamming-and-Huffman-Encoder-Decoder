@@ -174,6 +174,7 @@ public class DesprotegerPanel extends Panel {
             this.configHm();
             try {
                 hm.RDaS(path);
+                JOptionPane.showMessageDialog(this, "¡Archivo desprotegido con exito!", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
