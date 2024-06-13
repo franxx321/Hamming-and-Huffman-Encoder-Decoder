@@ -112,7 +112,8 @@ public class CompactarPanel extends Panel {
     private void AbrirAButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirAButtonActionPerformed
         // TODO add your handling code here:
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int r = j.showSaveDialog(null);
+
+        int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {
             path = j.getSelectedFile().getAbsolutePath();

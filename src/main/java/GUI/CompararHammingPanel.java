@@ -182,7 +182,7 @@ public class CompararHammingPanel extends Panel{
 
     private void abrirAButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButtonMousePressed
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int r = j.showSaveDialog(null);
+        int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {
             path = j.getSelectedFile().getAbsolutePath();
@@ -232,7 +232,7 @@ public class CompararHammingPanel extends Panel{
 
     private void abrirAButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButton2MousePressed
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int r = j.showSaveDialog(null);
+        int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {
             selected2 =true;

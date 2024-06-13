@@ -8,7 +8,7 @@ import Hamming.HammingProcessor;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 
 /**
@@ -183,6 +183,7 @@ public class ProtegerPanel extends Panel {
                     //TODO agregar el joptionPane(robarlo de IDS2)
                 }
                 hm.RHIEaS(path,aux);
+                JOptionPane.showMessageDialog(this, "¡Archivo protegido con exito!", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -194,6 +195,7 @@ public class ProtegerPanel extends Panel {
             hm.setBlockSize(Integer.parseInt(blockSizeComboBox.getItemAt(blockSizeComboBox.getSelectedIndex())));
             try {
                 hm.RHaS(path);
+                JOptionPane.showMessageDialog(this, "¡Archivo protegido con exito!", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -202,7 +204,7 @@ public class ProtegerPanel extends Panel {
 
     private void abrirAButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButtonMousePressed
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int r = j.showSaveDialog(null);
+        int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {
             selected =true;
@@ -248,6 +250,7 @@ public class ProtegerPanel extends Panel {
                         System.out.println("error");
                     }
                     hm.RHI2EaS(path,aux);
+                    JOptionPane.showMessageDialog(this, "¡Archivo protegido con exito!", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

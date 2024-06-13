@@ -137,7 +137,7 @@ public class DescompactarPanel extends Panel {
     private void AbrirAButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirAButtonActionPerformed
         // TODO add your handling code here:
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int r = j.showSaveDialog(null);
+        int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {
             path = j.getSelectedFile().getAbsolutePath();
@@ -175,7 +175,7 @@ public class DescompactarPanel extends Panel {
     private void AbrirTablaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirTablaButtonActionPerformed
         // TODO add your handling code here:
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int r = j.showSaveDialog(null);
+        int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {
             pathtable = j.getSelectedFile().getAbsolutePath();

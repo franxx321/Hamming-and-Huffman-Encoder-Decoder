@@ -188,6 +188,7 @@ public class DesprotegerPanel extends Panel {
             this.configHm();
             try {
                 hm.RCDaS(path);
+                JOptionPane.showMessageDialog(this, "¡Archivo desprotegido con exito!", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -203,7 +204,7 @@ public class DesprotegerPanel extends Panel {
 
     private void abrirAButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButtonMousePressed
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int r = j.showSaveDialog(null);
+        int r = j.showSaveDialog(this);
         if (r == JFileChooser.APPROVE_OPTION) {
             selected = true;
             path = j.getSelectedFile().getAbsolutePath();
