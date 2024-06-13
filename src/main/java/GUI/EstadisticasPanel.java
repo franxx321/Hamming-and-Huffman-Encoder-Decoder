@@ -21,11 +21,14 @@ import javax.swing.filechooser.FileSystemView;
  */
 public class EstadisticasPanel extends Panel {
 
+    private long pesoOrg;
+
     /**
      * Creates new form Estadisticas
      */
     public EstadisticasPanel() {
         initComponents();
+        pesoOrg = 0;
         OriginalTextArea.setEnabled(false);
         CompactadoTextArea.setEnabled(false);
         DescompactadoTextArea.setEnabled(false);
@@ -43,7 +46,6 @@ public class EstadisticasPanel extends Panel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         AbrirAButton = new javax.swing.JButton();
-        ArchivoLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         OriginalTextArea = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -61,6 +63,13 @@ public class EstadisticasPanel extends Panel {
         PesoDescLabel = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         PorcenLabel = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        AbrirAButton3 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        AbrirAButton2 = new javax.swing.JButton();
+        ArchivoLabel1 = new javax.swing.JLabel();
+        ArchivoLabel2 = new javax.swing.JLabel();
+        ArchivoLabel3 = new javax.swing.JLabel();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ESTADISTICAS");
@@ -100,91 +109,135 @@ public class EstadisticasPanel extends Panel {
 
         jLabel9.setText("Porcentaje de Reducción:");
 
+        jLabel10.setText("Seleccionar archivo compactado:");
+
+        AbrirAButton3.setText("Abrir Archivo");
+        AbrirAButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AbrirAButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Seleccionar archivo descompactado:");
+
+        AbrirAButton2.setText("Abrir Archivo");
+        AbrirAButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AbrirAButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(29, 29, 29)
-                        .addComponent(AbrirAButton)
-                        .addGap(36, 36, 36)
-                        .addComponent(ArchivoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(PesoOrgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(PorcenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(PesoComLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(PesoOrgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(PorcenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(PesoComLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(PesoDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel5)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel10))
+                                .addGap(155, 155, 155)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ArchivoLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                                    .addComponent(ArchivoLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ArchivoLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(162, 162, 162))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AbrirAButton2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(PesoDescLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel5)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(AbrirAButton3))
+                            .addComponent(AbrirAButton))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(AbrirAButton)
+                    .addComponent(ArchivoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AbrirAButton2)
+                    .addComponent(jLabel10)
+                    .addComponent(ArchivoLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(AbrirAButton))
-                    .addComponent(ArchivoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                        .addComponent(jLabel11)
+                        .addComponent(AbrirAButton3))
+                    .addComponent(ArchivoLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(PesoOrgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PesoComLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8))
+                            .addComponent(PesoComLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PesoOrgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(PorcenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(PesoDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(PorcenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 105, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void AbrirAButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirAButtonActionPerformed
         // TODO add your handling code here:
-        String path = "", name = "";
+        String path = "";
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         int r = j.showSaveDialog(null);
 
@@ -193,10 +246,8 @@ public class EstadisticasPanel extends Panel {
                 String s = "", cadena = "";
                 File fAux = j.getSelectedFile();
                 path = fAux.getAbsolutePath();
-                name = fAux.getName();
-                name = name.substring(0, name.lastIndexOf('.'));
 
-                ArchivoLabel.setText(path);
+                ArchivoLabel1.setText(path);
 
                 FileReader f = new FileReader(fAux);
                 BufferedReader b = new BufferedReader(f);
@@ -207,51 +258,96 @@ public class EstadisticasPanel extends Panel {
 
                 OriginalTextArea.setText(s);
 
-                long pesoOrg = fAux.length();
-                PesoOrgLabel.setText(fAux.length()+ " bytes");
+                PesoOrgLabel.setText(fAux.length() + " bytes");
+                pesoOrg = fAux.length();
 
-                s = "";
-                cadena = "";
-                String pathAux1 = path.substring(0, path.lastIndexOf('.')) + ".huf";
-                fAux = new File(pathAux1);
+            } catch (FileNotFoundException ex) {
+                //JOptionPane.showMessageDialog(this, "¡El archivo debe haber sido compactado y descompactado antes!", "Error", JOptionPane.INFORMATION_MESSAGE);
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            ArchivoLabel1.setText("No se cargo nada");
+        }
+    }//GEN-LAST:event_AbrirAButtonActionPerformed
 
-                f = new FileReader(fAux);
-                b = new BufferedReader(f);
+    private void AbrirAButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirAButton3ActionPerformed
+        // TODO add your handling code here:
+        String path = "";
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        int r = j.showSaveDialog(null);
 
-                while ((cadena = b.readLine()) != null) {
-                    s += cadena + "\n";
-                }
+        if (r == JFileChooser.APPROVE_OPTION) {
+            try {
+                String s = "", cadena = "";
+                File fAux = j.getSelectedFile();
+                path = fAux.getAbsolutePath();
 
-                CompactadoTextArea.setText(s);
-                PesoComLabel.setText(fAux.length() + " bytes");
-                
-                PorcenLabel.setText((int)(((float) fAux.length()/(float) pesoOrg)*100) + " %");
+                ArchivoLabel3.setText(path);
 
-                s = "";
-                cadena = "";
-                String pathAux2 = path.substring(0, path.lastIndexOf('.')) + ".dhu";
-                fAux = new File(pathAux2);
-                
-                f = new FileReader(fAux);
-                b = new BufferedReader(f);
+                FileReader f = new FileReader(fAux);
+                BufferedReader b = new BufferedReader(f);
 
                 while ((cadena = b.readLine()) != null) {
                     s += cadena + "\n";
                 }
 
                 DescompactadoTextArea.setText(s);
+
                 PesoDescLabel.setText(fAux.length() + " bytes");
 
             } catch (FileNotFoundException ex) {
-                JOptionPane.showMessageDialog(this, "¡El archivo debe haber sido compactado y descompactado antes!", "Error", JOptionPane.INFORMATION_MESSAGE);
-                //Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+                //JOptionPane.showMessageDialog(this, "¡El archivo debe haber sido compactado y descompactado antes!", "Error", JOptionPane.INFORMATION_MESSAGE);
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            ArchivoLabel.setText("No se cargo nada");
+            ArchivoLabel3.setText("No se cargo nada");
         }
-    }//GEN-LAST:event_AbrirAButtonActionPerformed
+    }//GEN-LAST:event_AbrirAButton3ActionPerformed
+
+    private void AbrirAButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirAButton2ActionPerformed
+        String path = "";
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        int r = j.showSaveDialog(null);
+
+        if (r == JFileChooser.APPROVE_OPTION) {
+            try {
+                String s = "", cadena = "";
+                File fAux = j.getSelectedFile();
+                path = fAux.getAbsolutePath();
+
+                ArchivoLabel2.setText(path);
+
+                FileReader f = new FileReader(fAux);
+                BufferedReader b = new BufferedReader(f);
+
+                while ((cadena = b.readLine()) != null) {
+                    s += cadena + "\n";
+                }
+
+                CompactadoTextArea.setText(s);
+
+                PesoComLabel.setText(fAux.length() + " bytes");
+
+                if (pesoOrg != 0) {
+                    PorcenLabel.setText((int) (((float) fAux.length() / (float) pesoOrg) * 100) + " %");
+                }else{
+                    PorcenLabel.setText("Debe cargar primero el archivo original");
+                }
+
+            } catch (FileNotFoundException ex) {
+                //JOptionPane.showMessageDialog(this, "¡El archivo debe haber sido compactado y descompactado antes!", "Error", JOptionPane.INFORMATION_MESSAGE);
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(CompactarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            ArchivoLabel2.setText("No se cargo nada");
+        }
+    }//GEN-LAST:event_AbrirAButton2ActionPerformed
 
     @Override
     public void init() {
@@ -261,13 +357,17 @@ public class EstadisticasPanel extends Panel {
         PesoComLabel.setText("");
         PesoDescLabel.setText("");
         PesoOrgLabel.setText("");
-        
+
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AbrirAButton;
-    private javax.swing.JLabel ArchivoLabel;
+    private javax.swing.JButton AbrirAButton2;
+    private javax.swing.JButton AbrirAButton3;
+    private javax.swing.JLabel ArchivoLabel1;
+    private javax.swing.JLabel ArchivoLabel2;
+    private javax.swing.JLabel ArchivoLabel3;
     private javax.swing.JTextArea CompactadoTextArea;
     private javax.swing.JTextArea DescompactadoTextArea;
     private javax.swing.JTextArea OriginalTextArea;
@@ -276,6 +376,8 @@ public class EstadisticasPanel extends Panel {
     private javax.swing.JLabel PesoOrgLabel;
     private javax.swing.JLabel PorcenLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
