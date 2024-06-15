@@ -203,7 +203,7 @@ public class ProtegerPanel extends Panel {
     }//GEN-LAST:event_protegerButtonMousePressed
 
     private void abrirAButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButtonMousePressed
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        JFileChooser j = new JFileChooser("./");
         int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {

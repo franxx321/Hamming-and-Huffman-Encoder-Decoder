@@ -198,7 +198,7 @@ public class HammingEstadisticasPanel extends Panel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void abrirAButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButtonMousePressed
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        JFileChooser j = new JFileChooser("./");
         int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {
@@ -242,7 +242,7 @@ public class HammingEstadisticasPanel extends Panel {
     }//GEN-LAST:event_abrirAButtonActionPerformed
 
     private void abrirAButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirAButton2MousePressed
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        JFileChooser j = new JFileChooser("./");
         int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {

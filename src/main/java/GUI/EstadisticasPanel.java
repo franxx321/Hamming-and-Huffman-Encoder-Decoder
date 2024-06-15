@@ -238,7 +238,7 @@ public class EstadisticasPanel extends Panel {
     private void AbrirAButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirAButtonActionPerformed
         // TODO add your handling code here:
         String path = "";
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        JFileChooser j = new JFileChooser("./");
         int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {
@@ -275,7 +275,7 @@ public class EstadisticasPanel extends Panel {
     private void AbrirAButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirAButton3ActionPerformed
         // TODO add your handling code here:
         String path = "";
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        JFileChooser j = new JFileChooser("./");
         int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {
@@ -310,7 +310,7 @@ public class EstadisticasPanel extends Panel {
 
     private void AbrirAButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirAButton2ActionPerformed
         String path = "";
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        JFileChooser j = new JFileChooser("./");
         int r = j.showSaveDialog(this);
 
         if (r == JFileChooser.APPROVE_OPTION) {
