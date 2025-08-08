@@ -1,0 +1,1 @@
+This project is a system that allows to encode and decode txt files with the hamming code for protection and huffman code for compression. It was made as the final assignment for the Information and Comunication Theory course at Universidad Nacional de San Luis
